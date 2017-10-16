@@ -91,7 +91,7 @@ public class ResourceLoaderUtil {
         InputStream input = null;
 
         try {
-            input = Thread.currentThread().getContextClassLoader().getResourceAsStream(CONFIG_PROPERTIES);
+            input = new FileInputStream(CONFIG_PROPERTIES);
             prop.load(input);
             Enumeration<Object> keys = prop.keys();
             if (keys.hasMoreElements()) {

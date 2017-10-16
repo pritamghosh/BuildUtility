@@ -10,4 +10,8 @@
         <modules/>
         <Path>D:\SVNs\CHECKIN\Resources\Trunk</Path>
     </Resources>
+    <Resources ProjectName="Checkin 1.7">
+        <modules/>
+        <Path>D:\SVNs\CHECKIN\Resources\CR-1.7</Path>
+    </Resources>
 </ResourcesHolder>

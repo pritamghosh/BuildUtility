@@ -110,34 +110,36 @@ public class HomeScreenController implements Initializable {
 
     private String constructMavenCommandForBuild() {
         StringBuilder command = new StringBuilder();
-        command.append("mvn");
-        if (isClean.isSelected()) {
-            command.append(" clean");
-        }
-        if (isInstall.isSelected()) {
-            command.append(" install");
-        }
-        if (dskipTests.isSelected()) {
-            command.append(" -DskipTests");
-        }
-        if (testSkip.isSelected()) {
-            command.append(" -Dmaven.test.skip=true");
-        }
-        if (isDevUserContext.isSelected()) {
-            command.append(" -Pdev-user-context");
-        }
-        if (test.isSelected()) {
-            constructMavenTestCommand(command);
-        }
-        if (isSonar.isSelected()) {
-            command.append(" sonar:sonar");
-            if (StringUtils.isNotEmpty(ProjecUtilContext.getProperties(ProjectUtilityConstant.SONAR_HOST_URL))) {
-                command.append(" -Dsonar.host.url=")
-                    .append(ProjecUtilContext.getProperties(ProjectUtilityConstant.SONAR_HOST_URL));
+        if (StringUtils.isNotEmpty(modulePath.getText())) {
+            command.append("mvn");
+            if (isClean.isSelected()) {
+                command.append(" clean");
             }
-        }
-        if (isEclipse.isSelected()) {
-            command.append(" eclipse:eclipse");
+            if (isInstall.isSelected()) {
+                command.append(" install");
+            }
+            if (dskipTests.isSelected()) {
+                command.append(" -DskipTests");
+            }
+            if (testSkip.isSelected()) {
+                command.append(" -Dmaven.test.skip=true");
+            }
+            if (isDevUserContext.isSelected()) {
+                command.append(" -Pdev-user-context");
+            }
+            if (test.isSelected()) {
+                constructMavenTestCommand(command);
+            }
+            if (isSonar.isSelected()) {
+                command.append(" sonar:sonar");
+                if (StringUtils.isNotEmpty(ProjecUtilContext.getProperties(ProjectUtilityConstant.SONAR_HOST_URL))) {
+                    command.append(" -Dsonar.host.url=")
+                        .append(ProjecUtilContext.getProperties(ProjectUtilityConstant.SONAR_HOST_URL));
+                }
+            }
+            if (isEclipse.isSelected()) {
+                command.append(" eclipse:eclipse");
+            }
         }
         return command.toString();
     }
@@ -333,6 +335,7 @@ public class HomeScreenController implements Initializable {
         if (codePane.isExpanded()) {
             testMetodName.setDisable(!test.isSelected());
             testCaseName.setDisable(!test.isSelected());
+            isDebug.setDisable(!test.isSelected());
             if (isRootProject.isSelected()) {
                 String selectedItem = projectCombo.getSelectionModel().getSelectedItem();
                 ProjectDO selectedProject = ProjecUtilContext.getProject(selectedItem);
@@ -379,8 +382,13 @@ public class HomeScreenController implements Initializable {
 
     private String constructMavenCommandResourceCommand() {
         StringBuilder command = new StringBuilder();
-        command.append("mvn clean install -Dvoyager.env=");
-        command.append(ProjecUtilContext.getFilters().get(filterCombo.getSelectionModel().getSelectedItem()));
+        String selectedFilter = filterCombo.getSelectionModel().getSelectedItem();
+        if (ProjecUtilContext.getFilters() != null && StringUtils.isNotEmpty(selectedFilter)
+            && StringUtils.isNotEmpty(resourcePath.getText())
+            && StringUtils.isNotEmpty(ProjecUtilContext.getFilters().get(selectedFilter))) {
+            command.append("mvn clean install -Dvoyager.env=");
+            command.append(ProjecUtilContext.getFilters().get(filterCombo.getSelectionModel().getSelectedItem()));
+        }
         return command.toString();
     }
 
@@ -437,9 +445,11 @@ public class HomeScreenController implements Initializable {
 
     public void save() {
         ProjecUtilContext.saveToContext();
+        refresh();
     }
 
     public void load() {
         ProjecUtilContext.loadContext();
+        refresh();
     }
 }

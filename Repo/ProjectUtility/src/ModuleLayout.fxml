@@ -12,7 +12,7 @@
    <children>
       <Label layoutX="39.0" layoutY="77.0" text="Project Name" />
       <Label layoutX="40.0" layoutY="213.0" text="Project Path" />
-      <TextField fx:id="moduleName" layoutX="163.0" layoutY="137.0" prefHeight="31.0" prefWidth="226.0" />
+      <TextField fx:id="moduleName" layoutX="163.0" layoutY="137.0" prefHeight="31.0" prefWidth="315.0" />
       <TextField fx:id="modulePath" accessibleRole="BUTTON" editable="false" layoutX="163.0" layoutY="208.0" onAction="#modulePathOnAction" onMouseClicked="#modulePathOnAction" prefHeight="31.0" prefWidth="315.0" />
       <Button fx:id="addMouduleButton" defaultButton="true" layoutX="198.0" layoutY="280.0" mnemonicParsing="false" onAction="#addModuleAction" text="Add Module" />
       <VBox layoutY="1.0" prefHeight="42.0" prefWidth="517.0">
@@ -25,6 +25,6 @@
          </children>
       </VBox>
       <Label layoutX="40.0" layoutY="142.0" prefHeight="21.0" prefWidth="107.0" text="Module Name" />
-      <ComboBox fx:id="projectCombo" layoutX="163.0" layoutY="72.0" prefHeight="31.0" prefWidth="226.0" />
+      <ComboBox fx:id="projectCombo" layoutX="163.0" layoutY="72.0" prefHeight="31.0" prefWidth="315.0" />
    </children>
 </AnchorPane>
