@@ -8,6 +8,15 @@ import java.util.TreeMap;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+/**
+ * <pre>
+ * <b>Description : </b>
+ * ResourceHolder.
+ * 
+ * @version $Revision: 1 $ $Date: Oct 16, 2017 8:20:18 PM $
+ * @author $Author: pritam.ghosh $ 
+ * </pre>
+ */
 @XmlRootElement(name = "ResourcesHolder")
 public class ResourceHolder {
     private List<ProjectDO> resources = new ArrayList<>();

@@ -1,4 +1,4 @@
-package application;
+package com.project.application;
 
 import com.project.constant.ProjectUtilityConstant;
 import com.project.util.ProjecUtilContext;
@@ -10,7 +10,16 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class Main extends Application {
+/**
+ * <pre>
+ * <b>Description : </b>
+ * Launcher.
+ * 
+ * @version $Revision: 1 $ $Date: Oct 16, 2017 8:14:01 PM $
+ * @author $Author: pritam.ghosh $ 
+ * </pre>
+ */
+public class Launcher extends Application {
     @Override
     public void start(Stage primaryStage) {
         try {

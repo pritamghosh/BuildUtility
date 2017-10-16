@@ -8,9 +8,15 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+
 /**
- * @author M1034079
- *
+ * <pre>
+ * <b>Description : </b>
+ * ProjectDO.
+ * 
+ * @version $Revision: 1 $ $Date: Oct 16, 2017 8:19:05 PM $
+ * @author $Author: pritam.ghosh $ 
+ * </pre>
  */
 @XmlRootElement(name = "Project", namespace = "http://com.project.dto")
 public class ProjectDO implements Serializable {

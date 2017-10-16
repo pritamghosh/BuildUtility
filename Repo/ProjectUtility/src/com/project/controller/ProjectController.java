@@ -14,6 +14,15 @@ import javafx.scene.control.TextField;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
 
+/**
+ * <pre>
+ * <b>Description : </b>
+ * ProjectController.
+ * 
+ * @version $Revision: 1 $ $Date: Oct 16, 2017 8:16:26 PM $
+ * @author $Author: pritam.ghosh $ 
+ * </pre>
+ */
 public class ProjectController {
     @FXML
     private Button actionButton;

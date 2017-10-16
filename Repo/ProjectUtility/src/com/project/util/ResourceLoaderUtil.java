@@ -7,8 +7,18 @@ import java.io.InputStream;
 import java.util.Enumeration;
 import java.util.Properties;
 
+
+/**
+ * <pre>
+ * <b>Description : </b>
+ * ResourceLoaderUtil.
+ * 
+ * @version $Revision: 1 $ $Date: Oct 16, 2017 8:11:48 PM $
+ * @author $Author: pritam.ghosh $ 
+ * </pre>
+ */
 public class ResourceLoaderUtil {
-    
+
     private static final String CONFIG_PROPERTIES = "config.properties";
 
     private ResourceLoaderUtil() {
@@ -17,16 +27,13 @@ public class ResourceLoaderUtil {
 
     public static void copyPropertirs() {
 
-        InputStream input = null;
-        try {
-            input = new FileInputStream(CONFIG_PROPERTIES);
-
+        try (InputStream input = new FileInputStream(CONFIG_PROPERTIES)) {
         }
         catch (IOException ex) {
-            input = Thread.currentThread().getContextClassLoader().getResourceAsStream(CONFIG_PROPERTIES);
-            FileOutputStream output = null;
-            try {
-                output = new FileOutputStream(CONFIG_PROPERTIES);
+            try (
+                InputStream input = Thread.currentThread().getContextClassLoader()
+                    .getResourceAsStream(CONFIG_PROPERTIES);
+                FileOutputStream output = new FileOutputStream(CONFIG_PROPERTIES);) {
                 byte[] buffer = new byte[1024];
                 int length;
                 while ((length = input.read(buffer)) > 0) {
@@ -36,37 +43,15 @@ public class ResourceLoaderUtil {
             catch (IOException ex1) {
                 System.out.println("unable to save properties file");
             }
-            finally {
-                if (output != null) {
-                    try {
-                        output.close();
-                    }
-                    catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
 
-        }
-        finally {
-            if (input != null) {
-                try {
-                    input.close();
-                }
-                catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
         }
     }
 
     public static void loadPropertirs(String key) {
         Properties prop = new Properties();
-        InputStream input = null;
 
-        try {
+        try (InputStream input = new FileInputStream(CONFIG_PROPERTIES)) {
 
-            input = new FileInputStream(CONFIG_PROPERTIES);
             prop.load(input);
             ProjecUtilContext.put(key, prop.get(key));
 
@@ -74,24 +59,12 @@ public class ResourceLoaderUtil {
         catch (IOException ex) {
             copyPropertirs();
         }
-        finally {
-            if (input != null) {
-                try {
-                    input.close();
-                }
-                catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
     }
 
     public static void loadPropertirs() {
         Properties prop = new Properties();
-        InputStream input = null;
 
-        try {
-            input = Thread.currentThread().getContextClassLoader().getResourceAsStream(CONFIG_PROPERTIES);
+        try (InputStream input = new FileInputStream(CONFIG_PROPERTIES)) {
             prop.load(input);
             Enumeration<Object> keys = prop.keys();
             if (keys.hasMoreElements()) {
@@ -102,16 +75,6 @@ public class ResourceLoaderUtil {
         }
         catch (IOException ex) {
             copyPropertirs();
-        }
-        finally {
-            if (input != null) {
-                try {
-                    input.close();
-                }
-                catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
         }
     }
 }

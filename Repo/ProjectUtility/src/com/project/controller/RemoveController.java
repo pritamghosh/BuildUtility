@@ -11,6 +11,15 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+/**
+ * <pre>
+ * <b>Description : </b>
+ * RemoveController.
+ * 
+ * @version $Revision: 1 $ $Date: Oct 16, 2017 8:16:30 PM $
+ * @author $Author: pritam.ghosh $ 
+ * </pre>
+ */
 public class RemoveController {
     @FXML
     private Button actionButton;

@@ -18,6 +18,15 @@ import javafx.scene.control.TextField;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
 
+/**
+ * <pre>
+ * <b>Description : </b>
+ * ModuleController.
+ * 
+ * @version $Revision: 1 $ $Date: Oct 16, 2017 8:16:21 PM $
+ * @author $Author: pritam.ghosh $ 
+ * </pre>
+ */
 public class ModuleController implements Initializable {
 
     @FXML

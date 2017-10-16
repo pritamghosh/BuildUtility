@@ -12,6 +12,15 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+/**
+ * <pre>
+ * <b>Description : </b>
+ * FilterController.
+ * 
+ * @version $Revision: 1 $ $Date: Oct 16, 2017 8:15:49 PM $
+ * @author $Author: pritam.ghosh $ 
+ * </pre>
+ */
 public class FilterController {
     private boolean isEdit;
     HomeScreenController controller;

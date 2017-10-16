@@ -1,5 +1,14 @@
 package com.project.util;
 
+/**
+ * <pre>
+ * <b>Description : </b>
+ * StringUtils.
+ * 
+ * @version $Revision: 1 $ $Date: Oct 16, 2017 8:18:11 PM $
+ * @author $Author: pritam.ghosh $ 
+ * </pre>
+ */
 public class StringUtils {
     
     private StringUtils() {
@@ -28,8 +37,10 @@ public class StringUtils {
         return substring(str, startIndex, -1);
     }
 
-    public static String substring(String str, int startIndex, int endIndex) {
+    public static String substring(String str, int startIndexParam, int endIndexParam) {
         if (str != null) {
+            int startIndex = startIndexParam;
+            int endIndex = endIndexParam;
             if (startIndex < 0)
                 startIndex = 0;
             if (endIndex < 0 || endIndex < startIndex)

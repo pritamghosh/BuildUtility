@@ -17,6 +17,15 @@ import com.project.dto.ProjectDO;
 import com.project.dto.ProjectHolder;
 import com.project.dto.ResourceHolder;
 
+/**
+ * <pre>
+ * <b>Description : </b>
+ * ProjecUtilContext.
+ * 
+ * @version $Revision: 1 $ $Date: Oct 16, 2017 8:18:46 PM $
+ * @author $Author: pritam.ghosh $ 
+ * </pre>
+ */
 public class ProjecUtilContext {
     private static ProjectHolder projectHolder;
     private static ResourceHolder resourceHolder;
