@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ResourcesHolder xmlns:ns2="http://com.project.dto">
+    <filters>
+        <entry>
+            <key>CPFAT</key>
+            <value>MTREE-CPFAT</value>
+        </entry>
+    </filters>
+    <Resources ProjectName="Checkin 2.0">
+        <modules/>
+        <Path>D:\SVNs\CHECKIN\Resources\Trunk</Path>
+    </Resources>
+</ResourcesHolder>
