@@ -2,7 +2,7 @@ package com.project.controller;
 
 import java.util.Map;
 
-import com.project.util.ProjecUtilContext;
+import com.project.util.BuildUtilityContextUtil;
 import com.project.util.StringUtils;
 
 import javafx.fxml.FXML;
@@ -41,8 +41,8 @@ public class FilterController {
         if (isEdit) {
             moduleTite.setText("Edit Filter");
             actionFilterButton.setText("Edit Filter");
-            if (ProjecUtilContext.getFilters() != null) {
-                filterCombo.getItems().addAll(ProjecUtilContext.getFilters().keySet());
+            if (BuildUtilityContextUtil.getFilters() != null) {
+                filterCombo.getItems().addAll(BuildUtilityContextUtil.getFilters().keySet());
                 filterCombo.getSelectionModel().selectFirst();
                 filterComboAction();
             }
@@ -55,11 +55,11 @@ public class FilterController {
             || StringUtils.isNotEmpty(filterCombo.getSelectionModel().getSelectedItem()))
             && StringUtils.isNotEmpty(filterProperties.getText())) {
             if (isEdit) {
-                ProjecUtilContext.addFilter(filterCombo.getSelectionModel().getSelectedItem(),
+                BuildUtilityContextUtil.addFilter(filterCombo.getSelectionModel().getSelectedItem(),
                     filterProperties.getText());
             }
             else {
-                ProjecUtilContext.addFilter(filterName.getText(), filterProperties.getText());
+                BuildUtilityContextUtil.addFilter(filterName.getText(), filterProperties.getText());
             }
             closeWindow();
         }
@@ -76,7 +76,7 @@ public class FilterController {
     }
 
     public void filterComboAction() {
-        Map<String, String> filters = ProjecUtilContext.getFilters();
+        Map<String, String> filters = BuildUtilityContextUtil.getFilters();
         if (filters != null) {
             filterProperties.setText(filters.get(filterCombo.getSelectionModel().getSelectedItem()));
         }

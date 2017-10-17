@@ -3,7 +3,7 @@ package com.project.controller;
 import java.io.File;
 
 import com.project.dto.ProjectDO;
-import com.project.util.ProjecUtilContext;
+import com.project.util.BuildUtilityContextUtil;
 import com.project.util.StringUtils;
 
 import javafx.fxml.FXML;
@@ -59,21 +59,21 @@ public class ProjectController {
             if (isProject) {
                 if (isCreate) {
                     newProject.setProjectName(projectName.getText());
-                    ProjecUtilContext.addProject(newProject);
+                    BuildUtilityContextUtil.addProject(newProject);
                 }
                 else {
                     newProject.setProjectName(projectCombo.getSelectionModel().getSelectedItem());
-                    ProjecUtilContext.editProject(newProject);
+                    BuildUtilityContextUtil.editProject(newProject);
                 }
             }
             else {
                 if (isCreate) {
                     newProject.setProjectName(projectName.getText());
-                    ProjecUtilContext.addResource(newProject);
+                    BuildUtilityContextUtil.addResource(newProject);
                 }
                 else {
                     newProject.setProjectName(projectCombo.getSelectionModel().getSelectedItem());
-                    ProjecUtilContext.editProject(newProject);
+                    BuildUtilityContextUtil.editProject(newProject);
                 }
             }
             closeWindow();
@@ -89,7 +89,7 @@ public class ProjectController {
     }
 
     public void projectComboAction() {
-        final ProjectDO project = ProjecUtilContext.getProject(projectCombo.getSelectionModel().getSelectedItem());
+        final ProjectDO project = BuildUtilityContextUtil.getProject(projectCombo.getSelectionModel().getSelectedItem());
         if (project != null) {
             projectPath.setText(project.getPath());
         }
@@ -117,10 +117,10 @@ public class ProjectController {
         projectCombo.setVisible(!isCreate);
         if (!isCreate) {
             if (isProject) {
-                projectCombo.getItems().addAll(ProjecUtilContext.getProjectHolder().getMap().keySet());
+                projectCombo.getItems().addAll(BuildUtilityContextUtil.getProjectHolder().getMap().keySet());
             }
             else {
-                projectCombo.getItems().addAll(ProjecUtilContext.getResourceNames());
+                projectCombo.getItems().addAll(BuildUtilityContextUtil.getResourceNames());
             }
             projectCombo.getSelectionModel().selectFirst();
         }

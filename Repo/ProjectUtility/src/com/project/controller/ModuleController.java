@@ -6,7 +6,7 @@ import java.util.ResourceBundle;
 
 import com.project.dto.ProjectDO;
 import com.project.dto.ProjectHolder;
-import com.project.util.ProjecUtilContext;
+import com.project.util.BuildUtilityContextUtil;
 import com.project.util.StringUtils;
 
 import javafx.collections.ObservableList;
@@ -43,13 +43,13 @@ public class ModuleController implements Initializable {
         String selectedKey = projectCombo.getSelectionModel().getSelectedItem();
         if (selectedKey != null && StringUtils.isNotEmpty(moduleName.getText())
             && StringUtils.isNotEmpty(modulePath.getText())) {
-            ProjectDO selectedProject = ProjecUtilContext.getProject(selectedKey);
+            ProjectDO selectedProject = BuildUtilityContextUtil.getProject(selectedKey);
             ProjectDO newModule = new ProjectDO();
             newModule.setProjectName(selectedKey + "-" + moduleName.getText());
             newModule.setPath(modulePath.getText());
             selectedProject.getModules().put(newModule.getProjectName(), newModule);
             newModule.setParentId(selectedKey);
-            ProjecUtilContext.addProject(newModule);
+            BuildUtilityContextUtil.addProject(newModule);
             closeWindow();
         }
     }
@@ -68,7 +68,7 @@ public class ModuleController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         ObservableList<String> items = projectCombo.getItems();
         items.clear();
-        ProjectHolder projectHolder = ProjecUtilContext.getProjectHolder();
+        ProjectHolder projectHolder = BuildUtilityContextUtil.getProjectHolder();
         if (projectHolder != null) {
             items.addAll(projectHolder.getMap().keySet());
         }
@@ -77,7 +77,7 @@ public class ModuleController implements Initializable {
 
     public void modulePathOnAction() {
         String selectedKey = projectCombo.getSelectionModel().getSelectedItem();
-        ProjectDO selectedProject = ProjecUtilContext.getProject(selectedKey);
+        ProjectDO selectedProject = BuildUtilityContextUtil.getProject(selectedKey);
         Stage currentStage = (Stage) addMouduleButton.getScene().getWindow();
         final DirectoryChooser directoryChooser = new DirectoryChooser();
         directoryChooser.setTitle("Select Some Directories");

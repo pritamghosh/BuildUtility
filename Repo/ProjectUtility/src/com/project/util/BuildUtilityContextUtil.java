@@ -26,12 +26,12 @@ import com.project.dto.ResourceHolder;
  * @author $Author: pritam.ghosh $ 
  * </pre>
  */
-public class ProjecUtilContext {
+public class BuildUtilityContextUtil {
     private static ProjectHolder projectHolder;
     private static ResourceHolder resourceHolder;
     private static final  Map<String, Object> context = new HashMap<>();
 
-    private ProjecUtilContext() {
+    private BuildUtilityContextUtil() {
         super();
     }
 

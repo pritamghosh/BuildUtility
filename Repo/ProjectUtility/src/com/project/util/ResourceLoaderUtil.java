@@ -53,7 +53,7 @@ public class ResourceLoaderUtil {
         try (InputStream input = new FileInputStream(CONFIG_PROPERTIES)) {
 
             prop.load(input);
-            ProjecUtilContext.put(key, prop.get(key));
+            BuildUtilityContextUtil.put(key, prop.get(key));
 
         }
         catch (IOException ex) {
@@ -69,7 +69,7 @@ public class ResourceLoaderUtil {
             Enumeration<Object> keys = prop.keys();
             if (keys.hasMoreElements()) {
                 String key = (String) keys.nextElement();
-                ProjecUtilContext.put(key, prop.get(key));
+                BuildUtilityContextUtil.put(key, prop.get(key));
             }
 
         }

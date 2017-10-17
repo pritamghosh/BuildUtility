@@ -1,7 +1,7 @@
 package com.project.controller;
 
 import com.project.dto.ProjectDO;
-import com.project.util.ProjecUtilContext;
+import com.project.util.BuildUtilityContextUtil;
 import com.project.util.StringUtils;
 
 import javafx.fxml.FXML;
@@ -48,13 +48,13 @@ public class RemoveController {
         final String selectedItem = nameCombo.getSelectionModel().getSelectedItem();
         if (StringUtils.isNotEmpty(selectedItem)) {
             if (isProject) {
-                ProjecUtilContext.removeProject(selectedItem);
+                BuildUtilityContextUtil.removeProject(selectedItem);
             }
             else if (isResource) {
-                ProjecUtilContext.removeResource(selectedItem);
+                BuildUtilityContextUtil.removeResource(selectedItem);
             }
             else if (isFilter) {
-                ProjecUtilContext.removeFilter(selectedItem);
+                BuildUtilityContextUtil.removeFilter(selectedItem);
             }
             closeWindow();
         }
@@ -71,16 +71,16 @@ public class RemoveController {
     public void nameComboAction() {
         if (isFilter) {
             detailsTestField
-                .setText(ProjecUtilContext.getFilters().get(nameCombo.getSelectionModel().getSelectedItem()));
+                .setText(BuildUtilityContextUtil.getFilters().get(nameCombo.getSelectionModel().getSelectedItem()));
         }
         else if (isResource) {
-            final ProjectDO project = ProjecUtilContext.getResource(nameCombo.getSelectionModel().getSelectedItem());
+            final ProjectDO project = BuildUtilityContextUtil.getResource(nameCombo.getSelectionModel().getSelectedItem());
             if (project != null) {
                 detailsTestField.setText(project.getPath());
             }
         }
         else if (isProject) {
-            final ProjectDO project = ProjecUtilContext.getProject(nameCombo.getSelectionModel().getSelectedItem());
+            final ProjectDO project = BuildUtilityContextUtil.getProject(nameCombo.getSelectionModel().getSelectedItem());
             if (project != null) {
                 detailsTestField.setText(project.getPath());
             }
@@ -97,10 +97,10 @@ public class RemoveController {
             moduleTite.setText("Remove Filter");
             nameLebel.setText("Filter Naeme");
             detailsLebel.setText("Filter Details");
-            nameCombo.getItems().addAll(ProjecUtilContext.getFilters().keySet());
+            nameCombo.getItems().addAll(BuildUtilityContextUtil.getFilters().keySet());
             nameCombo.getSelectionModel().selectFirst();
             detailsTestField
-                .setText(ProjecUtilContext.getFilters().get(nameCombo.getSelectionModel().getSelectedItem()));
+                .setText(BuildUtilityContextUtil.getFilters().get(nameCombo.getSelectionModel().getSelectedItem()));
         }
     }
 
@@ -110,9 +110,9 @@ public class RemoveController {
             moduleTite.setText("Remove Project");
             nameLebel.setText("Project Name");
             detailsLebel.setText("Resource Path");
-            nameCombo.getItems().addAll(ProjecUtilContext.getProjectHolder().getMap().keySet());
+            nameCombo.getItems().addAll(BuildUtilityContextUtil.getProjectHolder().getMap().keySet());
             nameCombo.getSelectionModel().selectFirst();
-            final ProjectDO project = ProjecUtilContext.getProject(nameCombo.getSelectionModel().getSelectedItem());
+            final ProjectDO project = BuildUtilityContextUtil.getProject(nameCombo.getSelectionModel().getSelectedItem());
             if (project != null) {
                 detailsTestField.setText(project.getPath());
             }
@@ -125,9 +125,9 @@ public class RemoveController {
             moduleTite.setText("Remove Resource");
             nameLebel.setText("Resource Name");
             detailsLebel.setText("Resource Path");
-            nameCombo.getItems().addAll(ProjecUtilContext.getResourceNames());
+            nameCombo.getItems().addAll(BuildUtilityContextUtil.getResourceNames());
             nameCombo.getSelectionModel().selectFirst();
-            final ProjectDO project = ProjecUtilContext.getResource(nameCombo.getSelectionModel().getSelectedItem());
+            final ProjectDO project = BuildUtilityContextUtil.getResource(nameCombo.getSelectionModel().getSelectedItem());
             if (project != null) {
                 detailsTestField.setText(project.getPath());
             }

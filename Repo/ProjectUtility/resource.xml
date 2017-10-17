@@ -5,13 +5,25 @@
             <key>CPFAT</key>
             <value>MTREE-CPFAT</value>
         </entry>
+        <entry>
+            <key>DCSFAT</key>
+            <value>MTREE-DCSFAT</value>
+        </entry>
+        <entry>
+            <key>FAT</key>
+            <value>MTREE-FAT</value>
+        </entry>
+        <entry>
+            <key>PAFAT</key>
+            <value>MTREE-PAFAT</value>
+        </entry>
     </filters>
+    <Resources ProjectName="Chelin-1.7">
+        <modules/>
+        <Path>D:\SVNs\CHECKIN\Resources\CR-1.7</Path>
+    </Resources>
     <Resources ProjectName="Checkin 2.0">
         <modules/>
         <Path>D:\SVNs\CHECKIN\Resources\Trunk</Path>
-    </Resources>
-    <Resources ProjectName="Checkin 1.7">
-        <modules/>
-        <Path>D:\SVNs\CHECKIN\Resources\CR-1.7</Path>
     </Resources>
 </ResourcesHolder>

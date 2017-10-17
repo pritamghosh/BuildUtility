@@ -1,7 +1,7 @@
 package com.project.application;
 
 import com.project.constant.ProjectUtilityConstant;
-import com.project.util.ProjecUtilContext;
+import com.project.util.BuildUtilityContextUtil;
 import com.project.util.ResourceLoaderUtil;
 
 import javafx.application.Application;
@@ -28,7 +28,7 @@ public class Launcher extends Application {
             primaryStage.setScene(scene);
             primaryStage.setTitle(ProjectUtilityConstant.TITLE);
             primaryStage.setResizable(false);
-            primaryStage.setOnCloseRequest(e->ProjecUtilContext.saveToContext());
+            primaryStage.setOnCloseRequest(e->BuildUtilityContextUtil.saveToContext());
             primaryStage.show();
         }
         catch (Exception e) {
@@ -43,6 +43,6 @@ public class Launcher extends Application {
 
     public static void loadContext() {
         ResourceLoaderUtil.copyPropertirs();
-        ProjecUtilContext.loadContext();
+        BuildUtilityContextUtil.loadContext();
     }
 }

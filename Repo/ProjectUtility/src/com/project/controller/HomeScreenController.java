@@ -1,5 +1,7 @@
 package com.project.controller;
 
+import java.awt.Desktop;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -9,7 +11,7 @@ import java.util.stream.Collectors;
 import com.project.constant.ProjectUtilityConstant;
 import com.project.dto.ProjectDO;
 import com.project.dto.ProjectHolder;
-import com.project.util.ProjecUtilContext;
+import com.project.util.BuildUtilityContextUtil;
 import com.project.util.StringUtils;
 
 import javafx.collections.ObservableList;
@@ -18,8 +20,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Accordion;
+import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -39,7 +43,12 @@ import javafx.stage.Stage;
  * </pre>
  */
 public class HomeScreenController implements Initializable {
-
+    @FXML
+    private Button removeFilterButton;
+    @FXML
+    private Button removeResourceButton;
+    @FXML
+    private Button openInExpButton;
     @FXML
     private Accordion rootPane;
     @FXML
@@ -86,6 +95,18 @@ public class HomeScreenController implements Initializable {
     ToggleGroup group = new ToggleGroup();
     @FXML
     TextArea commandLine;
+    @FXML
+    MenuItem removeFilterMenu;
+    @FXML
+    MenuItem removeProjectMenu;
+    @FXML
+    MenuItem removeResourceMenu;
+    @FXML
+    MenuItem editFilterMenu;
+    @FXML
+    MenuItem editProjectMenu;
+    @FXML
+    MenuItem editResourceMenu;
 
     public void buildAction() {
         onSelectionAction();
@@ -141,9 +162,9 @@ public class HomeScreenController implements Initializable {
             }
             if (isSonar.isSelected()) {
                 command.append(" sonar:sonar");
-                if (StringUtils.isNotEmpty(ProjecUtilContext.getProperties(ProjectUtilityConstant.SONAR_HOST_URL))) {
+                if (StringUtils.isNotEmpty(BuildUtilityContextUtil.getProperties(ProjectUtilityConstant.SONAR_HOST_URL))) {
                     command.append(" -Dsonar.host.url=")
-                        .append(ProjecUtilContext.getProperties(ProjectUtilityConstant.SONAR_HOST_URL));
+                        .append(BuildUtilityContextUtil.getProperties(ProjectUtilityConstant.SONAR_HOST_URL));
                 }
             }
             if (isEclipse.isSelected()) {
@@ -178,7 +199,7 @@ public class HomeScreenController implements Initializable {
     public void refresh() {
         ObservableList<String> items = projectCombo.getItems();
         items.clear();
-        ProjectHolder projectHolder = ProjecUtilContext.getProjectHolder();
+        ProjectHolder projectHolder = BuildUtilityContextUtil.getProjectHolder();
         if (projectHolder != null) {
             List<String> filteredProjects = projectHolder.getMap().values().stream()
                 .filter(project -> (project.getModules() != null && !project.getModules().isEmpty())
@@ -188,20 +209,20 @@ public class HomeScreenController implements Initializable {
             projectCombo.getSelectionModel().selectFirst();
         }
         moduleCombo.getItems().clear();
-        ProjectDO project = ProjecUtilContext.getProject(projectCombo.getSelectionModel().getSelectedItem());
+        ProjectDO project = BuildUtilityContextUtil.getProject(projectCombo.getSelectionModel().getSelectedItem());
         if (project != null) {
             moduleCombo.getItems().addAll(project.getModules().keySet());
             moduleCombo.getSelectionModel().selectFirst();
             modulePath.setText(project.getPath());
         }
         resourceCombo.getItems().clear();
-        if (ProjecUtilContext.getResourceNames() != null) {
-            resourceCombo.getItems().addAll(ProjecUtilContext.getResourceNames());
+        if (BuildUtilityContextUtil.getResourceNames() != null) {
+            resourceCombo.getItems().addAll(BuildUtilityContextUtil.getResourceNames());
             resourceCombo.getSelectionModel().selectFirst();
         }
         filterCombo.getItems().clear();
-        if (ProjecUtilContext.getFilters() != null) {
-            filterCombo.getItems().addAll(ProjecUtilContext.getFilters().keySet());
+        if (BuildUtilityContextUtil.getFilters() != null) {
+            filterCombo.getItems().addAll(BuildUtilityContextUtil.getFilters().keySet());
             filterCombo.getSelectionModel().selectFirst();
         }
         onSelectionAction();
@@ -209,7 +230,7 @@ public class HomeScreenController implements Initializable {
 
     public void projectComboOnClick() {
         moduleCombo.getItems().clear();
-        ProjectDO project = ProjecUtilContext.getProject(projectCombo.getSelectionModel().getSelectedItem());
+        ProjectDO project = BuildUtilityContextUtil.getProject(projectCombo.getSelectionModel().getSelectedItem());
         if (project != null) {
             moduleCombo.getItems().addAll(project.getModules().keySet());
             modulePath.setText(project.getPath());
@@ -219,7 +240,7 @@ public class HomeScreenController implements Initializable {
     }
 
     public void moduleComboOnClick() {
-        ProjectDO project = ProjecUtilContext.getProject(moduleCombo.getSelectionModel().getSelectedItem());
+        ProjectDO project = BuildUtilityContextUtil.getProject(moduleCombo.getSelectionModel().getSelectedItem());
         if (project != null) {
             modulePath.setText(project.getPath());
         }
@@ -286,13 +307,13 @@ public class HomeScreenController implements Initializable {
     }
 
     public void editProjct() {
-        if (ProjecUtilContext.getProjectHolder() != null
-            && !ProjecUtilContext.getProjectHolder().getMap().keySet().isEmpty())
+        if (BuildUtilityContextUtil.getProjectHolder() != null
+            && !BuildUtilityContextUtil.getProjectHolder().getMap().keySet().isEmpty())
             openProjectPopUp(ProjectUtilityConstant.EDIT_PROJECT_TITLE, true, false, "Edit Project");
     }
 
     public void editResource() {
-        if (ProjecUtilContext.getResourceNames() != null && !ProjecUtilContext.getResourceNames().isEmpty())
+        if (BuildUtilityContextUtil.getResourceNames() != null && !BuildUtilityContextUtil.getResourceNames().isEmpty())
             openProjectPopUp(ProjectUtilityConstant.CREATE_RESOURCE_TITLE, false, false, "Create Resource");
     }
 
@@ -347,13 +368,13 @@ public class HomeScreenController implements Initializable {
             isDebug.setDisable(!test.isSelected());
             if (isRootProject.isSelected()) {
                 String selectedItem = projectCombo.getSelectionModel().getSelectedItem();
-                ProjectDO selectedProject = ProjecUtilContext.getProject(selectedItem);
+                ProjectDO selectedProject = BuildUtilityContextUtil.getProject(selectedItem);
                 if (selectedProject != null)
                     modulePath.setText(selectedProject.getPath());
             }
             else {
                 String selectedItem = moduleCombo.getSelectionModel().getSelectedItem();
-                ProjectDO selectedProject = ProjecUtilContext.getProject(selectedItem);
+                ProjectDO selectedProject = BuildUtilityContextUtil.getProject(selectedItem);
                 if (selectedProject != null)
                     modulePath.setText(selectedProject.getPath());
             }
@@ -361,25 +382,39 @@ public class HomeScreenController implements Initializable {
             resourcePane.setExpanded(false);
         }
         else if (resourcePane.isExpanded()) {
-            ProjectDO selectedProject = ProjecUtilContext
+            ProjectDO selectedProject = BuildUtilityContextUtil
                 .getResource(resourceCombo.getSelectionModel().getSelectedItem());
             if (selectedProject != null)
                 resourcePath.setText(selectedProject.getPath());
             commandLine.setText(constructMavenCommandResourceCommand());
             codePane.setExpanded(false);
+            removeFilterButton
+                .setDisable(BuildUtilityContextUtil.getFilters() == null || BuildUtilityContextUtil.getFilters().isEmpty());
+            removeResourceButton.setDisable(
+                BuildUtilityContextUtil.getResourceNames() == null || BuildUtilityContextUtil.getResourceNames().isEmpty());
         }
         else {
             commandLine.setText("");
         }
+        removeFilterMenu
+        .setDisable(BuildUtilityContextUtil.getFilters() == null || BuildUtilityContextUtil.getFilters().isEmpty());
+        removeResourceMenu.setDisable(
+        BuildUtilityContextUtil.getResourceNames() == null || BuildUtilityContextUtil.getResourceNames().isEmpty());
+        removeProjectMenu.setDisable(BuildUtilityContextUtil.getProjectHolder() == null || BuildUtilityContextUtil.getProjectHolder().getMap().isEmpty());
+        editFilterMenu
+        .setDisable(BuildUtilityContextUtil.getFilters() == null || BuildUtilityContextUtil.getFilters().isEmpty());
+        editResourceMenu.setDisable(
+        BuildUtilityContextUtil.getResourceNames() == null || BuildUtilityContextUtil.getResourceNames().isEmpty());
+        editProjectMenu.setDisable(BuildUtilityContextUtil.getProjectHolder() == null || BuildUtilityContextUtil.getProjectHolder().getMap().isEmpty());
 
     }
 
     private String constructResourceCommand() {
         StringBuilder command = new StringBuilder();
         String selectedFilter = filterCombo.getSelectionModel().getSelectedItem();
-        if (ProjecUtilContext.getFilters() != null && StringUtils.isNotEmpty(selectedFilter)
+        if (BuildUtilityContextUtil.getFilters() != null && StringUtils.isNotEmpty(selectedFilter)
             && StringUtils.isNotEmpty(resourcePath.getText())
-            && StringUtils.isNotEmpty(ProjecUtilContext.getFilters().get(selectedFilter))) {
+            && StringUtils.isNotEmpty(BuildUtilityContextUtil.getFilters().get(selectedFilter))) {
             command.append(StringUtils.substring(resourcePath.getText(), 0, 2));
             command.append(" && cd ");
             command.append(resourcePath.getText());
@@ -392,19 +427,19 @@ public class HomeScreenController implements Initializable {
     private String constructMavenCommandResourceCommand() {
         StringBuilder command = new StringBuilder();
         String selectedFilter = filterCombo.getSelectionModel().getSelectedItem();
-        if (ProjecUtilContext.getFilters() != null && StringUtils.isNotEmpty(selectedFilter)
+        if (BuildUtilityContextUtil.getFilters() != null && StringUtils.isNotEmpty(selectedFilter)
             && StringUtils.isNotEmpty(resourcePath.getText())
-            && StringUtils.isNotEmpty(ProjecUtilContext.getFilters().get(selectedFilter))) {
+            && StringUtils.isNotEmpty(BuildUtilityContextUtil.getFilters().get(selectedFilter))) {
             command.append("mvn clean install -Dvoyager.env=");
-            command.append(ProjecUtilContext.getFilters().get(filterCombo.getSelectionModel().getSelectedItem()));
+            command.append(BuildUtilityContextUtil.getFilters().get(filterCombo.getSelectionModel().getSelectedItem()));
         }
         return command.toString();
     }
 
     public void openMvnSettingsMenuAction() {
         try {
-            String path = ProjecUtilContext.getProperties(ProjectUtilityConstant.NOTEPAD_HOME);
-            String mvnSettingsPath = ProjecUtilContext.getProperties(ProjectUtilityConstant.MVN_SETTINGS_PATH);
+            String path = BuildUtilityContextUtil.getProperties(ProjectUtilityConstant.NOTEPAD_HOME);
+            String mvnSettingsPath = BuildUtilityContextUtil.getProperties(ProjectUtilityConstant.MVN_SETTINGS_PATH);
             if (StringUtils.isNotEmpty(mvnSettingsPath) && StringUtils.isNotEmpty(path)) {
                 path = path + " " + mvnSettingsPath;
                 Runtime.getRuntime().exec(path);
@@ -448,17 +483,26 @@ public class HomeScreenController implements Initializable {
         }
     }
 
+    public void openInExplorer() {
+        try {
+            Desktop.getDesktop().open(new File(modulePath.getText()));
+        }
+        catch (IOException ex) {
+            System.out.println("unable to open folder :: " + ex.getMessage());
+        }
+    }
+
     public void runSonar() {
-        executeCommand(ProjecUtilContext.getProperties(ProjectUtilityConstant.SONAR_PATH));
+        executeCommand(BuildUtilityContextUtil.getProperties(ProjectUtilityConstant.SONAR_PATH));
     }
 
     public void save() {
-        ProjecUtilContext.saveToContext();
+        BuildUtilityContextUtil.saveToContext();
         refresh();
     }
 
     public void load() {
-        ProjecUtilContext.loadContext();
+        BuildUtilityContextUtil.loadContext();
         refresh();
     }
 }
