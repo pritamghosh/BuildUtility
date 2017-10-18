@@ -14,10 +14,10 @@
       <Label layoutX="44.0" layoutY="144.0" text="Project Path" />
       <TextField fx:id="projectName" layoutX="167.0" layoutY="72.0" prefHeight="31.0" prefWidth="307.0" />
       <TextField fx:id="projectPath" accessibleRole="BUTTON" editable="false" layoutX="167.0" layoutY="139.0" onAction="#projectPathOnAction" onMouseClicked="#projectPathOnAction" prefHeight="31.0" prefWidth="307.0" />
-      <Button fx:id="actionButton" defaultButton="true" layoutX="202.0" layoutY="211.0" mnemonicParsing="false" onAction="#defaultButtonAction" text="Create Project" />
+      <Button fx:id="actionButton" defaultButton="true" layoutX="184.0" layoutY="211.0" mnemonicParsing="false" onAction="#defaultButtonAction" prefHeight="31.0" prefWidth="150.0" text="Create Project" />
       <VBox layoutY="1.0" prefHeight="42.0" prefWidth="517.0">
          <children>
-            <Label fx:id="moduleTite" alignment="CENTER" prefHeight="43.0" prefWidth="499.0" text="Create Project" textAlignment="CENTER">
+            <Label fx:id="moduleTite" alignment="CENTER" prefHeight="43.0" prefWidth="513.0" text="Create Project" textAlignment="CENTER">
                <font>
                   <Font name="Baskerville Old Face" size="22.0" />
                </font>

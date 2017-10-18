@@ -89,7 +89,13 @@ public class ProjectController {
     }
 
     public void projectComboAction() {
-        final ProjectDO project = BuildUtilityContextUtil.getProject(projectCombo.getSelectionModel().getSelectedItem());
+        ProjectDO project = null;
+        if (isProject) {
+            project = BuildUtilityContextUtil.getProject(projectCombo.getSelectionModel().getSelectedItem());
+        }
+        else {
+            project = BuildUtilityContextUtil.getResource(projectCombo.getSelectionModel().getSelectedItem());
+        }
         if (project != null) {
             projectPath.setText(project.getPath());
         }
@@ -123,6 +129,7 @@ public class ProjectController {
                 projectCombo.getItems().addAll(BuildUtilityContextUtil.getResourceNames());
             }
             projectCombo.getSelectionModel().selectFirst();
+            projectComboAction();
         }
         this.isCreate = isCreate;
     }

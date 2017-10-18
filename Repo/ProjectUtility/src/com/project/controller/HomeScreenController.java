@@ -485,7 +485,10 @@ public class HomeScreenController implements Initializable {
 
     public void openInExplorer() {
         try {
-            Desktop.getDesktop().open(new File(modulePath.getText()));
+            if (codePane.isExpanded())
+                Desktop.getDesktop().open(new File(modulePath.getText()));
+            else
+                Desktop.getDesktop().open(new File(resourcePath.getText()));
         }
         catch (IOException ex) {
             System.out.println("unable to open folder :: " + ex.getMessage());

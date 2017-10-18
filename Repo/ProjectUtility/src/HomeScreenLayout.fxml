@@ -42,7 +42,7 @@
 				</Menu>
 				<Menu mnemonicParsing="false" onAction="#runSonar" text="_Run">
 					<items>
-						<MenuItem mnemonicParsing="false" text="_Sonar" />
+						<MenuItem mnemonicParsing="false" text="Sonar" />
 					</items>
 				</Menu>
 				<Menu mnemonicParsing="false" text="_Project">
@@ -65,9 +65,7 @@
                            </accelerator>
                         </MenuItem>
                         <MenuItem fx:id="newFilterMenu" mnemonicParsing="false" onAction="#newFilterAcion" text="Env Filter">
-                           <accelerator>
-                              <KeyCodeCombination alt="DOWN" code="EQUALS" control="UP" meta="UP" shift="UP" shortcut="UP" />
-                           </accelerator>
+                           
                         </MenuItem>
 							</items>
 						</Menu>
@@ -144,7 +142,7 @@
                               <AnchorPane prefHeight="353.0" prefWidth="1065.0">
                                  <children>
                                     <Label layoutX="101.0" layoutY="183.0" prefHeight="33.0" prefWidth="102.0" text="Resource-Path" />
-                                    <TextField fx:id="resourcePath" editable="false" layoutX="298.0" layoutY="184.0" onAction="#onSelectionAction" prefHeight="31.0" prefWidth="606.0" />
+                                    <TextField fx:id="resourcePath" editable="false" layoutX="298.0" layoutY="184.0" onAction="#onSelectionAction" prefHeight="31.0" prefWidth="462.0" />
                                     <Button fx:id="resourceBuildButton" defaultButton="true" layoutX="429.0" layoutY="279.0" mnemonicParsing="false" onAction="#buildActionForResource" prefHeight="31.0" prefWidth="208.0" text="Build" />
                                     <Label layoutX="101.0" layoutY="78.0" prefHeight="33.0" prefWidth="102.0" text="Project-Name" />
                                     <ComboBox fx:id="resourceCombo" layoutX="300.0" layoutY="79.0" onAction="#onSelectionAction" onMouseClicked="#onSelectionAction" prefHeight="31.0" prefWidth="373.0" />
@@ -168,6 +166,11 @@
                                     <Button fx:id="removeResourceButton" alignment="CENTER" contentDisplay="CENTER" layoutX="744.0" layoutY="80.0" mnemonicParsing="false" onAction="#removeResource" prefHeight="13.0" prefWidth="28.0">
                                        <graphic>
                                           <FontAwesomeIconView glyphName="MINUS_CIRCLE" size="16.0" />
+                                       </graphic>
+                                    </Button>
+                                    <Button alignment="CENTER" contentDisplay="CENTER" layoutX="740.0" layoutY="184.0" mnemonicParsing="false" onAction="#openInExplorer" opacity="0.99" prefHeight="30.0" prefWidth="0.0">
+                                       <graphic>
+                                          <FontAwesomeIconView glyphName="FOLDER_OPEN" size="16.0" text="" />
                                        </graphic>
                                     </Button>
                                  </children>
