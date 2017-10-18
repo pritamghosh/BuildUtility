@@ -65,6 +65,7 @@ public class ResourceLoaderUtil {
         Properties prop = new Properties();
 
         try (InputStream input = new FileInputStream(CONFIG_PROPERTIES)) {
+
             prop.load(input);
             Enumeration<Object> keys = prop.keys();
             if (keys.hasMoreElements()) {

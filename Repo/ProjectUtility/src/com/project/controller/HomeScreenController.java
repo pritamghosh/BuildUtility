@@ -162,9 +162,11 @@ public class HomeScreenController implements Initializable {
             }
             if (isSonar.isSelected()) {
                 command.append(" sonar:sonar");
-                if (StringUtils.isNotEmpty(BuildUtilityContextUtil.getProperties(ProjectUtilityConstant.SONAR_HOST_URL))) {
+                if (StringUtils
+                    .isNotEmpty(BuildUtilityContextUtil.getProperties(ProjectUtilityConstant.SONAR_HOST_URL))) {
                     command.append(" -Dsonar.host.url=")
                         .append(BuildUtilityContextUtil.getProperties(ProjectUtilityConstant.SONAR_HOST_URL));
+
                 }
             }
             if (isEclipse.isSelected()) {
@@ -388,24 +390,26 @@ public class HomeScreenController implements Initializable {
                 resourcePath.setText(selectedProject.getPath());
             commandLine.setText(constructMavenCommandResourceCommand());
             codePane.setExpanded(false);
-            removeFilterButton
-                .setDisable(BuildUtilityContextUtil.getFilters() == null || BuildUtilityContextUtil.getFilters().isEmpty());
-            removeResourceButton.setDisable(
-                BuildUtilityContextUtil.getResourceNames() == null || BuildUtilityContextUtil.getResourceNames().isEmpty());
+            removeFilterButton.setDisable(
+                BuildUtilityContextUtil.getFilters() == null || BuildUtilityContextUtil.getFilters().isEmpty());
+            removeResourceButton.setDisable(BuildUtilityContextUtil.getResourceNames() == null
+                || BuildUtilityContextUtil.getResourceNames().isEmpty());
         }
         else {
             commandLine.setText("");
         }
         removeFilterMenu
-        .setDisable(BuildUtilityContextUtil.getFilters() == null || BuildUtilityContextUtil.getFilters().isEmpty());
+            .setDisable(BuildUtilityContextUtil.getFilters() == null || BuildUtilityContextUtil.getFilters().isEmpty());
         removeResourceMenu.setDisable(
-        BuildUtilityContextUtil.getResourceNames() == null || BuildUtilityContextUtil.getResourceNames().isEmpty());
-        removeProjectMenu.setDisable(BuildUtilityContextUtil.getProjectHolder() == null || BuildUtilityContextUtil.getProjectHolder().getMap().isEmpty());
+            BuildUtilityContextUtil.getResourceNames() == null || BuildUtilityContextUtil.getResourceNames().isEmpty());
+        removeProjectMenu.setDisable(BuildUtilityContextUtil.getProjectHolder() == null
+            || BuildUtilityContextUtil.getProjectHolder().getMap().isEmpty());
         editFilterMenu
-        .setDisable(BuildUtilityContextUtil.getFilters() == null || BuildUtilityContextUtil.getFilters().isEmpty());
+            .setDisable(BuildUtilityContextUtil.getFilters() == null || BuildUtilityContextUtil.getFilters().isEmpty());
         editResourceMenu.setDisable(
-        BuildUtilityContextUtil.getResourceNames() == null || BuildUtilityContextUtil.getResourceNames().isEmpty());
-        editProjectMenu.setDisable(BuildUtilityContextUtil.getProjectHolder() == null || BuildUtilityContextUtil.getProjectHolder().getMap().isEmpty());
+            BuildUtilityContextUtil.getResourceNames() == null || BuildUtilityContextUtil.getResourceNames().isEmpty());
+        editProjectMenu.setDisable(BuildUtilityContextUtil.getProjectHolder() == null
+            || BuildUtilityContextUtil.getProjectHolder().getMap().isEmpty());
 
     }
 
@@ -501,7 +505,6 @@ public class HomeScreenController implements Initializable {
 
     public void save() {
         BuildUtilityContextUtil.saveToContext();
-        refresh();
     }
 
     public void load() {
