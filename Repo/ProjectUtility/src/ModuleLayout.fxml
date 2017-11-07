@@ -3,12 +3,13 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="349.0" prefWidth="517.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.controller.ModuleController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="373.0" prefWidth="517.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.controller.ModuleController">
    <children>
       <Label layoutX="39.0" layoutY="77.0" text="Project Name" />
       <Label layoutX="40.0" layoutY="213.0" text="Project Path" />
@@ -26,5 +27,6 @@
       </VBox>
       <Label layoutX="40.0" layoutY="142.0" prefHeight="21.0" prefWidth="107.0" text="Module Name" />
       <ComboBox fx:id="projectCombo" layoutX="163.0" layoutY="72.0" prefHeight="31.0" prefWidth="315.0" />
+      <TextArea fx:id="errorPanel" editable="false" layoutX="-1.0" layoutY="326.0" prefHeight="60.0" prefWidth="532.0" style="-fx-text-fill: #ff0000;" visible="false" />
    </children>
 </AnchorPane>

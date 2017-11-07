@@ -16,6 +16,7 @@ import com.project.constant.ProjectUtilityConstant;
 import com.project.dto.ProjectDO;
 import com.project.dto.ProjectHolder;
 import com.project.dto.ResourceHolder;
+import com.project.exception.BuildUtilCustomException;
 
 /**
  * <pre>
@@ -29,7 +30,7 @@ import com.project.dto.ResourceHolder;
 public class BuildUtilityContextUtil {
     private static ProjectHolder projectHolder;
     private static ResourceHolder resourceHolder;
-    private static final  Map<String, Object> context = new HashMap<>();
+    private static final Map<String, Object> context = new HashMap<>();
 
     private BuildUtilityContextUtil() {
         super();
@@ -62,20 +63,30 @@ public class BuildUtilityContextUtil {
         return context.put(key, value);
     }
 
-    public static final void addProject(ProjectDO value) {
+    public static final void addProject(ProjectDO value) throws BuildUtilCustomException {
         if (projectHolder == null) {
             projectHolder = new ProjectHolder();
         }
-        projectHolder.getMap().put(value.getProjectName(), value);
-        saveToContext();
+        if (!projectHolder.getMap().containsKey(value.getProjectName())) {
+            projectHolder.getMap().put(value.getProjectName(), value);
+            saveToContext();
+        }
+        else {
+            throw new BuildUtilCustomException("Project/Module name already exists", "Please try with different name");
+        }
     }
 
-    public static void addResource(ProjectDO newResource) {
+    public static void addResource(ProjectDO newResource) throws BuildUtilCustomException {
         if (resourceHolder == null) {
             resourceHolder = new ResourceHolder();
         }
-        resourceHolder.getResources().add(newResource);
-        saveToContext();
+        if (!resourceHolder.getResources().contains(newResource)) {
+            resourceHolder.getResources().add(newResource);
+            saveToContext();
+        }
+        else {
+            throw new BuildUtilCustomException("Resource name already exists", "Please try with different name");
+        }
     }
 
     public static final ProjectDO getProject(String key) {
@@ -103,9 +114,8 @@ public class BuildUtilityContextUtil {
 
     public static final void editProject(ProjectDO project) {
         ProjectDO projectRef = getProject(project.getProjectName());
-        if (projectHolder != null&&projectRef!=null) {
-            editModules(project.getProjectName(), project.getPath(), projectRef.getPath(),
-                projectHolder.getMap());
+        if (projectHolder != null && projectRef != null) {
+            editModules(project.getProjectName(), project.getPath(), projectRef.getPath(), projectHolder.getMap());
         }
         saveToContext();
     }
@@ -201,7 +211,6 @@ public class BuildUtilityContextUtil {
             System.out.println("unable to load resource context");
         }
     }
-
 
     public static void removeFilter(String key) {
         resourceHolder.getFilters().remove(key);

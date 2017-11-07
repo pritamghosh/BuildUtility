@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 
 import com.project.dto.ProjectDO;
 import com.project.dto.ProjectHolder;
+import com.project.exception.BuildUtilCustomException;
 import com.project.util.BuildUtilityContextUtil;
 import com.project.util.StringUtils;
 
@@ -14,6 +15,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
@@ -38,6 +40,8 @@ public class ModuleController implements Initializable {
     private TextField moduleName;
     @FXML
     private TextField modulePath;
+    @FXML
+    private TextArea errorPanel;
 
     public void addModuleAction() {
         String selectedKey = projectCombo.getSelectionModel().getSelectedItem();
@@ -49,8 +53,19 @@ public class ModuleController implements Initializable {
             newModule.setPath(modulePath.getText());
             selectedProject.getModules().put(newModule.getProjectName(), newModule);
             newModule.setParentId(selectedKey);
-            BuildUtilityContextUtil.addProject(newModule);
-            closeWindow();
+            try {
+                BuildUtilityContextUtil.addProject(newModule);
+                closeWindow();
+            }
+            catch (BuildUtilCustomException ex) {
+                errorPanel.setText(ex.getMessage().concat("\n").concat(ex.getCorrectiveAcction()));
+                errorPanel.setVisible(true);
+            }
+        }
+        else {
+            errorPanel.setText("Please enter mandetory fields");
+            errorPanel.setVisible(true);
+        
         }
     }
 

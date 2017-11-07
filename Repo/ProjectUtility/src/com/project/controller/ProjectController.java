@@ -3,6 +3,7 @@ package com.project.controller;
 import java.io.File;
 
 import com.project.dto.ProjectDO;
+import com.project.exception.BuildUtilCustomException;
 import com.project.util.BuildUtilityContextUtil;
 import com.project.util.StringUtils;
 
@@ -10,6 +11,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
@@ -37,6 +39,8 @@ public class ProjectController {
     private TextField projectName;
     @FXML
     private TextField projectPath;
+    @FXML
+    private TextArea errorPanel;
 
     private void closeWindow() {
         final Stage currentStage = (Stage) actionButton.getScene().getWindow();
@@ -59,24 +63,43 @@ public class ProjectController {
             if (isProject) {
                 if (isCreate) {
                     newProject.setProjectName(projectName.getText());
-                    BuildUtilityContextUtil.addProject(newProject);
+                    try {
+                        BuildUtilityContextUtil.addProject(newProject);
+                        closeWindow();
+                    }
+                    catch (BuildUtilCustomException ex) {
+                        errorPanel.setText(ex.getMessage().concat("\n").concat(ex.getCorrectiveAcction()));
+                        errorPanel.setVisible(true);
+                    }
                 }
                 else {
                     newProject.setProjectName(projectCombo.getSelectionModel().getSelectedItem());
                     BuildUtilityContextUtil.editProject(newProject);
+                    closeWindow();
                 }
             }
             else {
                 if (isCreate) {
                     newProject.setProjectName(projectName.getText());
-                    BuildUtilityContextUtil.addResource(newProject);
+                    try {
+                        BuildUtilityContextUtil.addResource(newProject);
+                        closeWindow();
+                    }
+                    catch (BuildUtilCustomException ex) {
+                        errorPanel.setText(ex.getMessage().concat("\n").concat(ex.getCorrectiveAcction()));
+                        errorPanel.setVisible(true);
+                    }
                 }
                 else {
                     newProject.setProjectName(projectCombo.getSelectionModel().getSelectedItem());
                     BuildUtilityContextUtil.editProject(newProject);
+                    closeWindow();
                 }
             }
-            closeWindow();
+        }
+        else {
+            errorPanel.setText("Please enter mandetory fields");
+            errorPanel.setVisible(true);
         }
     }
 

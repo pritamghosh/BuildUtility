@@ -316,7 +316,7 @@ public class HomeScreenController implements Initializable {
 
     public void editResource() {
         if (BuildUtilityContextUtil.getResourceNames() != null && !BuildUtilityContextUtil.getResourceNames().isEmpty())
-            openProjectPopUp(ProjectUtilityConstant.CREATE_RESOURCE_TITLE, false, false, "Create Resource");
+            openProjectPopUp(ProjectUtilityConstant.EDIT_RESOURCE_TITLE, false, false, "Edit Resource");
     }
 
     public void removeFilter() {
