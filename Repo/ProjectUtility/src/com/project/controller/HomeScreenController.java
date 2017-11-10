@@ -8,9 +8,15 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
+
+import org.xml.sax.SAXException;
+
 import com.project.constant.ProjectUtilityConstant;
 import com.project.dto.ProjectDO;
 import com.project.dto.ProjectHolder;
+import com.project.helper.BuildUtilityHelper;
 import com.project.util.BuildUtilityContextUtil;
 import com.project.util.StringUtils;
 
@@ -163,9 +169,9 @@ public class HomeScreenController implements Initializable {
             if (isSonar.isSelected()) {
                 command.append(" sonar:sonar");
                 if (StringUtils
-                    .isNotEmpty(BuildUtilityContextUtil.getProperties(ProjectUtilityConstant.SONAR_HOST_URL))) {
+                    .isNotEmpty(BuildUtilityContextUtil.getProperties(ProjectUtilityConstant.LOCAL_SONAR_HOST_URL))) {
                     command.append(" -Dsonar.host.url=")
-                        .append(BuildUtilityContextUtil.getProperties(ProjectUtilityConstant.SONAR_HOST_URL));
+                        .append(BuildUtilityContextUtil.getProperties(ProjectUtilityConstant.LOCAL_SONAR_HOST_URL));
 
                 }
             }
@@ -450,7 +456,18 @@ public class HomeScreenController implements Initializable {
             }
         }
         catch (IOException e) {
-            System.out.println("unable to open setteings.xml");
+           commandLine.setText("unable to open setteings.xml");
+        }
+    }
+    public void openNotepadPP() {
+        try {
+            String path = BuildUtilityContextUtil.getProperties(ProjectUtilityConstant.NOTEPAD_HOME);
+            if (StringUtils.isNotEmpty(path)) {
+                Runtime.getRuntime().exec(path);
+            }
+        }
+        catch (IOException e) {
+            commandLine.setText("unable to lauch Notepad ++");
         }
     }
 
@@ -485,6 +502,7 @@ public class HomeScreenController implements Initializable {
         catch (Exception ex) {
             System.out.println("unable to load filter module");
         }
+        onSelectionAction();
     }
 
     public void openInExplorer() {
@@ -498,7 +516,32 @@ public class HomeScreenController implements Initializable {
             System.out.println("unable to open folder :: " + ex.getMessage());
         }
     }
-
+    public void removeGoogleAction() {
+        try {
+            boolean isSuccess = new BuildUtilityHelper().removeGooglePlugin();
+            if(isSuccess) {
+                commandLine.setText("com.google.code.maven-svn-revision-number-plugin has been removed");
+            }
+            else {
+                commandLine.setText("com.google.code.maven-svn-revision-number-plugin not found");
+            }
+        }
+        catch (SAXException | IOException | ParserConfigurationException | TransformerException ex) {
+            commandLine.setText("unable to remove com.google.code.maven-svn-revision-number-plugin");
+        }
+    }
+    public void browseLocalSonar() {
+        new BuildUtilityHelper().openLinkInBrowser(ProjectUtilityConstant.LOCAL_SONAR_HOST_URL);
+    }
+    public void browseDcsSonar() {
+        new BuildUtilityHelper().openLinkInBrowser(ProjectUtilityConstant.DCS_SONAR_HOST_URL);
+    }
+    public void browseJenkins() {
+        new BuildUtilityHelper().openLinkInBrowser(ProjectUtilityConstant.DCS_JENKINS_URL);
+    }
+    public void browseUserUnlock() {
+        new BuildUtilityHelper().openLinkInBrowser(ProjectUtilityConstant.USER_UNLOCK);
+    }
     public void runSonar() {
         executeCommand(BuildUtilityContextUtil.getProperties(ProjectUtilityConstant.SONAR_PATH));
     }

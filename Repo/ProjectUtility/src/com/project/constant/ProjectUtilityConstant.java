@@ -24,7 +24,10 @@ public class ProjectUtilityConstant {
     public static final String REMOVE_FILTER_TITLE = "Remove Filter Dialog";
     public static final String RESOURCE_PATH_PROJECT = "RESOURCE_PATH_PROJECT";
     public static final String RESOURCE_PATH_RESOURCE = "RESOURCE_PATH_RESOURCE";
-    public static final String SONAR_HOST_URL = "SONAR_HOST_URL";
+    public static final String LOCAL_SONAR_HOST_URL = "LOCAL_SONAR_HOST_URL";
+    public static final String DCS_SONAR_HOST_URL = "DCS_SONAR_HOST_URL";
+    public static final String DCS_JENKINS_URL = "DCS_JENKINS_URL";
+    public static final String USER_UNLOCK = "USER_UNLOCK";
     public static final String NOTEPAD_HOME = "NOTEPAD_HOME";
     public static final String MVN_SETTINGS_PATH = "MVN_SETTINGS_PATH";
     public static final String SONAR_PATH = "SONAR_PATH";

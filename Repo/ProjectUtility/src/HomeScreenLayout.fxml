@@ -29,7 +29,7 @@
                   <Menu mnemonicParsing="false" text="Open">
                     <items>
                         <MenuItem fx:id="openMvnSettingsMenu" mnemonicParsing="false" onAction="#openMvnSettingsMenuAction" text="Settings.xml" />
-                      <MenuItem mnemonicParsing="false" text="Notepad++" />
+                      <MenuItem mnemonicParsing="false" onAction="#openNotepadPP" text="Notepad++" />
                     </items>
                   </Menu>
 						<MenuItem fx:id="exportContext" mnemonicParsing="false" onAction="#save" text="Export Context" />
@@ -85,9 +85,17 @@
                   </Menu>
 					</items>
 				</Menu>
+            <Menu mnemonicParsing="false" text="Links">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#browseLocalSonar" text="Local Sonar" />
+                  <MenuItem mnemonicParsing="false" onAction="#browseDcsSonar" text="Sonar" />
+                  <MenuItem mnemonicParsing="false" onAction="#browseJenkins" text="Jenkins" />
+                  <MenuItem mnemonicParsing="false" onAction="#browseUserUnlock" text="User Unlock" />
+               </items>
+            </Menu>
 				<Menu mnemonicParsing="false" text="Help">
 					<items>
-						<MenuItem mnemonicParsing="false" text="About" />
+						<MenuItem mnemonicParsing="false" onAction="#removeGoogleAction" text="Remove Google" />
 					</items>
 				</Menu>
 			</menus>
@@ -107,14 +115,14 @@
                   						<Label layoutX="101.0" layoutY="127.0" prefHeight="33.0" prefWidth="102.0" text="Module-Path" />
                   						<Label layoutX="99.0" layoutY="179.0" prefHeight="33.0" prefWidth="140.0" text="Test Class Name" />
                   						<Label layoutX="97.0" layoutY="228.0" prefHeight="33.0" prefWidth="145.0" text="Test Method Name" />
-                  						<TextField fx:id="modulePath" editable="false" layoutX="298.0" layoutY="128.0" onAction="#onSelectionAction" prefHeight="31.0" prefWidth="527.0" />
+                  						<TextField fx:id="modulePath" editable="false" layoutX="298.0" layoutY="128.0" onAction="#onSelectionAction" onMouseClicked="#onSelectionAction" prefHeight="31.0" prefWidth="527.0" />
                   						<TextField fx:id="testCaseName" layoutX="298.0" layoutY="180.0" onAction="#onSelectionAction" onKeyPressed="#onSelectionAction" onKeyReleased="#onSelectionAction" onKeyTyped="#onSelectionAction" onMouseClicked="#onSelectionAction" prefHeight="31.0" prefWidth="660.0" />
                   						<TextField fx:id="testMetodName" layoutX="298.0" layoutY="230.0" onAction="#onSelectionAction" onKeyPressed="#onSelectionAction" onKeyReleased="#onSelectionAction" onKeyTyped="#onSelectionAction" onMouseClicked="#onSelectionAction" prefHeight="31.0" prefWidth="662.0" />
                   						<Button fx:id="buildButton" defaultButton="true" layoutX="422.0" layoutY="488.0" mnemonicParsing="false" onAction="#buildAction" prefHeight="31.0" prefWidth="208.0" text="Build" />
                   						<CheckBox fx:id="isDebug" layoutX="465.0" layoutY="307.0" mnemonicParsing="false" onAction="#onSelectionAction" prefHeight="21.0" prefWidth="122.0" text="Debug" />
                   						<Label layoutX="101.0" layoutY="78.0" prefHeight="33.0" prefWidth="102.0" text="Project-Details" />
-                  						<ComboBox fx:id="projectCombo" layoutX="298.0" layoutY="71.0" onAction="#projectComboOnClick" prefHeight="31.0" prefWidth="299.0" />
-                  						<ComboBox fx:id="moduleCombo" layoutX="628.0" layoutY="71.0" onAction="#moduleComboOnClick" prefHeight="31.0" prefWidth="332.0" />
+                  						<ComboBox fx:id="projectCombo" layoutX="298.0" layoutY="71.0" onAction="#projectComboOnClick" onMouseClicked="#onSelectionAction" prefHeight="31.0" prefWidth="299.0" />
+                  						<ComboBox fx:id="moduleCombo" layoutX="628.0" layoutY="71.0" onAction="#moduleComboOnClick" onMouseClicked="#onSelectionAction" prefHeight="31.0" prefWidth="332.0" />
                   						<CheckBox fx:id="isSonar" layoutX="465.0" layoutY="357.0" mnemonicParsing="false" onAction="#onSelectionAction" prefHeight="21.0" prefWidth="122.0" text="Sonar" />
                   						<RadioButton fx:id="dskipTests" layoutX="806.0" layoutY="292.0" mnemonicParsing="false" onAction="#onSelectionAction" prefHeight="31.0" prefWidth="151.0" selected="true" text="-DskipTests">
                   							<toggleGroup>
@@ -142,7 +150,7 @@
                               <AnchorPane prefHeight="353.0" prefWidth="1065.0">
                                  <children>
                                     <Label layoutX="101.0" layoutY="183.0" prefHeight="33.0" prefWidth="102.0" text="Resource-Path" />
-                                    <TextField fx:id="resourcePath" editable="false" layoutX="298.0" layoutY="184.0" onAction="#onSelectionAction" prefHeight="31.0" prefWidth="462.0" />
+                                    <TextField fx:id="resourcePath" editable="false" layoutX="298.0" layoutY="184.0" onAction="#onSelectionAction" onMouseClicked="#onSelectionAction" prefHeight="31.0" prefWidth="462.0" />
                                     <Button fx:id="resourceBuildButton" defaultButton="true" layoutX="429.0" layoutY="279.0" mnemonicParsing="false" onAction="#buildActionForResource" prefHeight="31.0" prefWidth="208.0" text="Build" />
                                     <Label layoutX="101.0" layoutY="78.0" prefHeight="33.0" prefWidth="102.0" text="Project-Name" />
                                     <ComboBox fx:id="resourceCombo" layoutX="300.0" layoutY="79.0" onAction="#onSelectionAction" onMouseClicked="#onSelectionAction" prefHeight="31.0" prefWidth="373.0" />
