@@ -98,6 +98,10 @@ public class HomeScreenController implements Initializable {
     @FXML
     private CheckBox isRootProject;
     @FXML
+    private Button buildButton;
+    @FXML
+    private Button resourceBuildButton;
+    @FXML
     ToggleGroup group = new ToggleGroup();
     @FXML
     TextArea commandLine;
@@ -147,23 +151,22 @@ public class HomeScreenController implements Initializable {
     private String constructMavenCommandForBuild() {
         StringBuilder command = new StringBuilder();
         if (StringUtils.isNotEmpty(modulePath.getText())) {
-            command.append("mvn");
             if (isClean.isSelected()) {
                 command.append(" clean");
             }
             if (isInstall.isSelected()) {
                 command.append(" install");
             }
-            if (dskipTests.isSelected()) {
+            if (dskipTests.isSelected() && !dskipTests.isDisable()) {
                 command.append(" -DskipTests");
             }
-            if (testSkip.isSelected()) {
+            if (testSkip.isSelected() && !testSkip.isDisable()) {
                 command.append(" -Dmaven.test.skip=true");
             }
-            if (isDevUserContext.isSelected()) {
+            if (isDevUserContext.isSelected() && !dskipTests.isDisable()) {
                 command.append(" -Pdev-user-context");
             }
-            if (test.isSelected()) {
+            if (test.isSelected() && !test.isDisable()) {
                 constructMavenTestCommand(command);
             }
             if (isSonar.isSelected()) {
@@ -179,12 +182,15 @@ public class HomeScreenController implements Initializable {
                 command.append(" eclipse:eclipse");
             }
         }
-        return command.toString();
+        if (command.length() > 0) {
+            return "mvn" + command;
+        }
+        return "";
     }
 
     private void constructMavenTestCommand(StringBuilder command) {
         command.append(" test ");
-        if (isDebug.isSelected()) {
+        if (isDebug.isSelected() && !isDebug.isDisable()) {
             command.append(" -Dmaven.surefire.debug");
         }
         if (StringUtils.isNotEmpty(testCaseName.getText())) {
@@ -371,9 +377,12 @@ public class HomeScreenController implements Initializable {
 
     public void onSelectionAction() {
         if (codePane.isExpanded()) {
-            testMetodName.setDisable(!test.isSelected());
-            testCaseName.setDisable(!test.isSelected());
-            isDebug.setDisable(!test.isSelected());
+            dskipTests.setDisable(!(isClean.isSelected()|| isInstall.isSelected() || isSonar.isSelected()));
+            testSkip.setDisable(!(isClean.isSelected()|| isInstall.isSelected() || isSonar.isSelected()));
+            testMetodName.setDisable(!test.isSelected()||test.isDisable());
+            testCaseName.setDisable(!test.isSelected()||test.isDisable());
+            isDebug.setDisable(!test.isSelected()||test.isDisable());
+            isDevUserContext.setDisable(!(isClean.isSelected()|| isInstall.isSelected()));
             if (isRootProject.isSelected()) {
                 String selectedItem = projectCombo.getSelectionModel().getSelectedItem();
                 ProjectDO selectedProject = BuildUtilityContextUtil.getProject(selectedItem);
@@ -386,7 +395,15 @@ public class HomeScreenController implements Initializable {
                 if (selectedProject != null)
                     modulePath.setText(selectedProject.getPath());
             }
-            commandLine.setText(constructMavenCommandForBuild());
+            String command = constructMavenCommandForBuild();
+            if(StringUtils.isNotEmpty(command)) {
+            commandLine.setText(command);
+            buildButton.setDisable(false);
+            }
+            else {
+                commandLine.setText("");
+                buildButton.setDisable(true);
+            }
             resourcePane.setExpanded(false);
         }
         else if (resourcePane.isExpanded()) {
@@ -394,7 +411,15 @@ public class HomeScreenController implements Initializable {
                 .getResource(resourceCombo.getSelectionModel().getSelectedItem());
             if (selectedProject != null)
                 resourcePath.setText(selectedProject.getPath());
-            commandLine.setText(constructMavenCommandResourceCommand());
+            String resourceBuildCommand = constructMavenCommandResourceCommand();
+            if(StringUtils.isNotEmpty(resourceBuildCommand)) {
+                commandLine.setText(resourceBuildCommand);
+                resourceBuildButton.setDisable(false);
+            }
+            else {
+                commandLine.setText("");
+                resourceBuildButton.setDisable(true);
+            }
             codePane.setExpanded(false);
             removeFilterButton.setDisable(
                 BuildUtilityContextUtil.getFilters() == null || BuildUtilityContextUtil.getFilters().isEmpty());
