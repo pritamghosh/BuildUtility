@@ -1,5 +1,7 @@
 package com.project.application;
 
+import org.apache.log4j.Logger;
+
 import com.project.constant.ProjectUtilityConstant;
 import com.project.util.BuildUtilityContextUtil;
 import com.project.util.ResourceLoaderUtil;
@@ -20,6 +22,8 @@ import javafx.stage.Stage;
  * </pre>
  */
 public class Launcher extends Application {
+    private static final Logger LOGGER = Logger.getLogger(Launcher.class);
+
     @Override
     public void start(Stage primaryStage) {
         try {
@@ -28,11 +32,11 @@ public class Launcher extends Application {
             primaryStage.setScene(scene);
             primaryStage.setTitle(ProjectUtilityConstant.TITLE);
             primaryStage.setResizable(false);
-            primaryStage.setOnCloseRequest(e->BuildUtilityContextUtil.saveToContext());
+            primaryStage.setOnCloseRequest(e -> BuildUtilityContextUtil.saveToContext());
             primaryStage.show();
         }
-        catch (Exception e) {
-            e.printStackTrace();
+        catch (Exception ex) {
+            LOGGER.error(ex);
         }
     }
 

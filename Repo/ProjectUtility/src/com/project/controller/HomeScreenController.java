@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 
+import org.apache.log4j.Logger;
 import org.xml.sax.SAXException;
 
 import com.project.constant.ProjectUtilityConstant;
@@ -49,6 +50,8 @@ import javafx.stage.Stage;
  * </pre>
  */
 public class HomeScreenController implements Initializable {
+
+    private static final Logger LOGGER = Logger.getLogger(HomeScreenController.class);
     @FXML
     private Button removeFilterButton;
     @FXML
@@ -127,8 +130,9 @@ public class HomeScreenController implements Initializable {
         try {
             Runtime.getRuntime().exec("cmd /c start cmd.exe /K \"" + command + "\"");
         }
-        catch (IOException e) {
-            System.out.println("unable to execute command");
+        catch (IOException ex) {
+            LOGGER.error(ex);
+            LOGGER.error("unable to execute command");
         }
     }
 
@@ -277,11 +281,13 @@ public class HomeScreenController implements Initializable {
             primaryStage.setResizable(false);
             primaryStage.showAndWait();
         }
-        catch (IOException e) {
-            System.out.println("unable to load Module layout");
+        catch (IOException ex) {
+            LOGGER.error(ex);
+            LOGGER.error("unable to load Module layout");
         }
-        catch (Exception e) {
-            System.out.println("unable to load Module module");
+        catch (Exception ex) {
+            LOGGER.error(ex);
+            LOGGER.error("unable to load Module module");
         }
     }
 
@@ -304,11 +310,13 @@ public class HomeScreenController implements Initializable {
             primaryStage.initOwner(rootPane.getScene().getWindow());
             primaryStage.showAndWait();
         }
-        catch (IOException e) {
-            System.out.println("unable to load layout");
+        catch (IOException ex) {
+            LOGGER.error(ex);
+            LOGGER.error("unable to load layout");
         }
         catch (Exception ex) {
-            System.out.println("unable to load module ");
+            LOGGER.error(ex);
+            LOGGER.error("unable to load module ");
         }
     }
 
@@ -358,10 +366,12 @@ public class HomeScreenController implements Initializable {
             primaryStage.showAndWait();
         }
         catch (IOException ex) {
-            System.out.println("unable to load layout");
+            LOGGER.error(ex);
+            LOGGER.error("unable to load layout");
         }
         catch (Exception ex) {
-            System.out.println("unable to load module ");
+            LOGGER.error(ex);
+            LOGGER.error("unable to load module ");
         }
     }
 
@@ -522,10 +532,12 @@ public class HomeScreenController implements Initializable {
             primaryStage.showAndWait();
         }
         catch (IOException ex) {
-            System.out.println("unable to load filter layout");
+            LOGGER.error(ex);
+            LOGGER.error("unable to load filter layout");
         }
         catch (Exception ex) {
-            System.out.println("unable to load filter module");
+            LOGGER.error(ex);
+            LOGGER.error("unable to load filter module");
         }
         onSelectionAction();
     }
@@ -538,7 +550,8 @@ public class HomeScreenController implements Initializable {
                 Desktop.getDesktop().open(new File(resourcePath.getText()));
         }
         catch (IOException ex) {
-            System.out.println("unable to open folder :: " + ex.getMessage());
+            LOGGER.error(ex);
+            LOGGER.error("unable to open folder :: " + ex.getMessage());
         }
     }
     public void removeGoogleAction() {

@@ -45,7 +45,6 @@ public class StringUtils {
                 startIndex = 0;
             if (endIndex < 0 || endIndex < startIndex)
                 endIndex = str.length();
-            System.out.println(str.length());
             if (str.length() < startIndex)
                 return "";
             else if (str.length() < endIndex)

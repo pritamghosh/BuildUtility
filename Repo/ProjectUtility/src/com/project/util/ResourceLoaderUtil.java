@@ -7,6 +7,8 @@ import java.io.InputStream;
 import java.util.Enumeration;
 import java.util.Properties;
 
+import org.apache.log4j.Logger;
+
 
 /**
  * <pre>
@@ -21,30 +23,27 @@ public class ResourceLoaderUtil {
 
     private static final String CONFIG_PROPERTIES = "config.properties";
 
+    private static final Logger LOGGER = Logger.getLogger(ResourceLoaderUtil.class);
+
     private ResourceLoaderUtil() {
         super();
     }
 
     public static void copyPropertirs() {
 
-        try (InputStream input = new FileInputStream(CONFIG_PROPERTIES)) {
+        try (InputStream input = Thread.currentThread().getContextClassLoader().getResourceAsStream(CONFIG_PROPERTIES);
+            FileOutputStream output = new FileOutputStream(CONFIG_PROPERTIES);) {
+            byte[] buffer = new byte[1024];
+            int length;
+            while ((length = input.read(buffer)) > 0) {
+                output.write(buffer, 0, length);
+            }
         }
         catch (IOException ex) {
-            try (
-                InputStream input = Thread.currentThread().getContextClassLoader()
-                    .getResourceAsStream(CONFIG_PROPERTIES);
-                FileOutputStream output = new FileOutputStream(CONFIG_PROPERTIES);) {
-                byte[] buffer = new byte[1024];
-                int length;
-                while ((length = input.read(buffer)) > 0) {
-                    output.write(buffer, 0, length);
-                }
-            }
-            catch (IOException ex1) {
-                System.out.println("unable to save properties file");
-            }
-
+            LOGGER.error(ex);
+            LOGGER.error("unable to save properties file");
         }
+
     }
 
     public static void loadPropertirs(String key) {
@@ -58,6 +57,7 @@ public class ResourceLoaderUtil {
         }
         catch (IOException ex) {
             copyPropertirs();
+            loadPropertirs(key);
         }
     }
 
@@ -76,6 +76,7 @@ public class ResourceLoaderUtil {
         }
         catch (IOException ex) {
             copyPropertirs();
+            loadPropertirs();
         }
     }
 }

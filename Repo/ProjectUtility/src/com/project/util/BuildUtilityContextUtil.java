@@ -12,6 +12,8 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
+import org.apache.log4j.Logger;
+
 import com.project.constant.ProjectUtilityConstant;
 import com.project.dto.ProjectDO;
 import com.project.dto.ProjectHolder;
@@ -31,6 +33,7 @@ public class BuildUtilityContextUtil {
     private static ProjectHolder projectHolder;
     private static ResourceHolder resourceHolder;
     private static final Map<String, Object> context = new HashMap<>();
+    private static final Logger LOGGER = Logger.getLogger(BuildUtilityContextUtil.class);
 
     private BuildUtilityContextUtil() {
         super();
@@ -172,8 +175,9 @@ public class BuildUtilityContextUtil {
             marshallerObj.marshal(projectHolder,
                 new FileOutputStream(getProperties(ProjectUtilityConstant.RESOURCE_PATH_PROJECT)));
         }
-        catch (Exception e) {
-            System.out.println("unable to save project context");
+        catch (Exception ex) {
+            LOGGER.error(ex);
+            LOGGER.error("unable to save project context");
         }
         try {
             JAXBContext contextObj = JAXBContext.newInstance(ResourceHolder.class, ProjectDO.class);
@@ -184,8 +188,9 @@ public class BuildUtilityContextUtil {
             marshallerObj.marshal(resourceHolder,
                 new FileOutputStream(getProperties(ProjectUtilityConstant.RESOURCE_PATH_RESOURCE)));
         }
-        catch (Exception e) {
-            System.out.println("unable to save resource context");
+        catch (Exception ex) {
+            LOGGER.error(ex);
+            LOGGER.error("unable to save resource context");
         }
     }
 
@@ -198,7 +203,8 @@ public class BuildUtilityContextUtil {
                 .unmarshal(new File(getProperties(ProjectUtilityConstant.RESOURCE_PATH_PROJECT)));
         }
         catch (Exception ex) {
-            System.out.println("unable to load project context");
+            LOGGER.error(ex);
+            LOGGER.error("unable to load project context");
         }
 
         try {
@@ -208,7 +214,8 @@ public class BuildUtilityContextUtil {
                 .unmarshal(new File(getProperties(ProjectUtilityConstant.RESOURCE_PATH_RESOURCE)));
         }
         catch (Exception ex) {
-            System.out.println("unable to load resource context");
+            LOGGER.error(ex);
+            LOGGER.error("unable to load resource context");
         }
     }
 
@@ -243,7 +250,6 @@ public class BuildUtilityContextUtil {
             for (; i >= 0; i--) {
                 String parentId2 = parentIds.get(i);
                 ProjectDO projectDO = map.get(parentId2);
-                System.out.println("TWO  " + parentId2);
                 if (projectDO != null) {
                     map = projectDO.getModules();
                     map.remove(key);

@@ -4,6 +4,8 @@ import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import org.apache.log4j.Logger;
+
 import com.project.dto.ProjectDO;
 import com.project.dto.ProjectHolder;
 import com.project.exception.BuildUtilCustomException;
@@ -30,7 +32,7 @@ import javafx.stage.Stage;
  * </pre>
  */
 public class ModuleController implements Initializable {
-
+    private static final Logger LOGGER = Logger.getLogger(ModuleController.class);
     @FXML
     private ComboBox<String> projectCombo;
     HomeScreenController controller;
@@ -104,7 +106,8 @@ public class ModuleController implements Initializable {
                 modulePath.setText(dir.getAbsolutePath());
             }
             catch (Exception ex) {
-                System.out.println("dir is not available");
+                LOGGER.error(ex);
+                LOGGER.error("dir is not available");
             }
         }
         else {
