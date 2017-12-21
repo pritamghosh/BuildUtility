@@ -69,7 +69,7 @@ public class HomeScreenController implements Initializable {
     @FXML
     private CheckBox isSonar;
     @FXML
-    private CheckBox isEclipse;
+    private CheckBox isOffline;
     @FXML
     private CheckBox isClean;
     @FXML
@@ -155,6 +155,9 @@ public class HomeScreenController implements Initializable {
     private String constructMavenCommandForBuild() {
         StringBuilder command = new StringBuilder();
         if (StringUtils.isNotEmpty(modulePath.getText())) {
+            if (isOffline.isSelected()) {
+                command.append(" -o");
+            }
             if (isClean.isSelected()) {
                 command.append(" clean");
             }
@@ -181,9 +184,6 @@ public class HomeScreenController implements Initializable {
                         .append(BuildUtilityContextUtil.getProperties(ProjectUtilityConstant.LOCAL_SONAR_HOST_URL));
 
                 }
-            }
-            if (isEclipse.isSelected()) {
-                command.append(" eclipse:eclipse");
             }
         }
         if (command.length() > 0) {

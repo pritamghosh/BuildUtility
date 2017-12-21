@@ -130,7 +130,7 @@
                   							</toggleGroup>
                   						</RadioButton>
                   						<RadioButton fx:id="testSkip" layoutX="806.0" layoutY="342.0" mnemonicParsing="false" onAction="#onSelectionAction" prefHeight="31.0" prefWidth="154.0" text="-Dmaven.test.skip" toggleGroup="$group" />
-                  						<CheckBox fx:id="isEclipse" layoutX="465.0" layoutY="407.0" mnemonicParsing="false" onAction="#onSelectionAction" prefHeight="21.0" prefWidth="122.0" text="Eclipse" />
+                  						<CheckBox fx:id="isOffline" layoutX="465.0" layoutY="407.0" mnemonicParsing="false" onAction="#onSelectionAction" prefHeight="21.0" prefWidth="122.0" text="Offline" />
                   						<RadioButton fx:id="test" layoutX="806.0" layoutY="392.0" mnemonicParsing="false" onAction="#onSelectionAction" prefHeight="31.0" prefWidth="106.0" text="Test" toggleGroup="$group" />
                   						<CheckBox fx:id="isClean" layoutX="99.0" layoutY="296.0" mnemonicParsing="false" onAction="#onSelectionAction" prefHeight="21.0" prefWidth="122.0" selected="true" text="Clean" />
                   						<CheckBox fx:id="isInstall" layoutX="99.0" layoutY="346.0" mnemonicParsing="false" onAction="#onSelectionAction" prefHeight="21.0" prefWidth="122.0" selected="true" text="Install" />

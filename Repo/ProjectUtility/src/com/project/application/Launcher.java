@@ -46,7 +46,7 @@ public class Launcher extends Application {
     }
 
     public static void loadContext() {
-        ResourceLoaderUtil.copyPropertirs();
+        ResourceLoaderUtil.loadPropertirs();
         BuildUtilityContextUtil.loadContext();
     }
 }
