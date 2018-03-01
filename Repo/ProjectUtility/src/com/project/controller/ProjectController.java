@@ -2,6 +2,8 @@ package com.project.controller;
 
 import java.io.File;
 
+import org.apache.log4j.Logger;
+
 import com.project.dto.ProjectDO;
 import com.project.exception.BuildUtilCustomException;
 import com.project.util.BuildUtilityContextUtil;
@@ -26,6 +28,7 @@ import javafx.stage.Stage;
  * </pre>
  */
 public class ProjectController {
+    private static final Logger LOGGER = Logger.getLogger(ProjectController.class);
     @FXML
     private Button actionButton;
     HomeScreenController controller;
@@ -48,11 +51,6 @@ public class ProjectController {
         currentStage.close();
     }
 
-    private void configuringDirectoryChooser(final DirectoryChooser directoryChooser) {
-        directoryChooser.setTitle("Select Some Directories");
-        directoryChooser.setInitialDirectory(new File(System.getProperty("user.home")));
-
-    }
 
     public void defaultButtonAction() {
         if ((StringUtils.isNotEmpty(projectName.getText())
@@ -79,8 +77,8 @@ public class ProjectController {
                 }
             }
             else {
+                newProject.setProjectName(projectName.getText());
                 if (isCreate) {
-                    newProject.setProjectName(projectName.getText());
                     try {
                         BuildUtilityContextUtil.addResource(newProject);
                         closeWindow();
@@ -92,8 +90,14 @@ public class ProjectController {
                 }
                 else {
                     newProject.setProjectName(projectCombo.getSelectionModel().getSelectedItem());
-                    BuildUtilityContextUtil.editProject(newProject);
-                    closeWindow();
+                    try {
+                        BuildUtilityContextUtil.editResource(newProject);
+                        closeWindow();
+                    }
+                    catch (BuildUtilCustomException ex) {
+                        errorPanel.setText(ex.getMessage().concat("\n").concat(ex.getCorrectiveAcction()));
+                        errorPanel.setVisible(true);
+                    }
                 }
             }
         }
@@ -127,7 +131,21 @@ public class ProjectController {
     public void projectPathOnAction() {
         final Stage currentStage = (Stage) actionButton.getScene().getWindow();
         final DirectoryChooser directoryChooser = new DirectoryChooser();
-        configuringDirectoryChooser(directoryChooser);
+        directoryChooser.setTitle("Select Some Directories");
+        File path = new File(System.getProperty("user.home"));
+        if(isCreate) {
+            directoryChooser.setInitialDirectory(path);
+        }
+        else {
+            try {
+                path = new File(projectPath.getText());
+            }
+            catch (Exception ex) {
+                LOGGER.error(ex);
+                LOGGER.error("path cannon be empty");
+            }
+            directoryChooser.setInitialDirectory(path);
+        }
         final File dir = directoryChooser.showDialog(currentStage);
         if (dir != null) {
             projectPath.setText(dir.getAbsolutePath());

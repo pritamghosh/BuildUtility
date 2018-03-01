@@ -173,7 +173,7 @@ public class HomeScreenController implements Initializable {
             if (isDevUserContext.isSelected() && !dskipTests.isDisable()) {
                 command.append(" -Pdev-user-context");
             }
-            if (test.isSelected() && !test.isDisable()) {
+            if (!isInstall.isSelected() && !isSonar.isSelected() && (test.isSelected() && !test.isDisable())) {
                 constructMavenTestCommand(command);
             }
             if (isSonar.isSelected()) {

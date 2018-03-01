@@ -67,7 +67,7 @@ public class ModuleController implements Initializable {
         else {
             errorPanel.setText("Please enter mandetory fields");
             errorPanel.setVisible(true);
-        
+
         }
     }
 

@@ -91,6 +91,20 @@ public class BuildUtilityContextUtil {
             throw new BuildUtilCustomException("Resource name already exists", "Please try with different name");
         }
     }
+    
+    public static void editResource(ProjectDO newResource) throws BuildUtilCustomException {
+        if (resourceHolder == null) {
+            resourceHolder = new ResourceHolder();
+        }
+        ProjectDO resource = getResource(newResource.getProjectName());
+        if (resource != null) {
+            resource.setPath(newResource.getPath());
+        }
+        else {
+            throw new BuildUtilCustomException("Resource not found", "Please try again with correct resource name");
+        }
+        saveToContext();
+    }
 
     public static final ProjectDO getProject(String key) {
         return projectHolder != null ? projectHolder.getMap().get(key) : null;
