@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ResourcesHolder xmlns:ns2="http://com.project.dto">
+    <filters>
+        <entry>
+            <key>CPFAT</key>
+            <value>MTREE-CPFAT</value>
+        </entry>
+        <entry>
+            <key>DCSFAT</key>
+            <value>MTREE-DCSFAT</value>
+        </entry>
+        <entry>
+            <key>FAT</key>
+            <value>MTREE-FAT</value>
+        </entry>
+        <entry>
+            <key>PAFAT</key>
+            <value>MTREE-PAFAT</value>
+        </entry>
+        <entry>
+            <key>UTDCS</key>
+            <value>MTREE-UTDCS</value>
+        </entry>
+    </filters>
+    <Resources ProjectName="Checkin Trunk">
+        <modules/>
+        <Path>D:\SVNs\CHECKIN\Resources\Trunk</Path>
+    </Resources>
+    <Resources ProjectName="Travel-Trunk">
+        <modules/>
+        <Path>D:\SVNs\Travel\Resources\Trunk</Path>
+    </Resources>
+    <Resources ProjectName="Seats-trunk">
+        <modules/>
+        <Path>D:\SVNs\Seats\Resources\TRUNK</Path>
+    </Resources>
+</ResourcesHolder>

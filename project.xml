@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ProjectsHolder xmlns:ns2="http://com.project.dto">
+    <map>
+        <entry>
+            <key>UI-Trunk</key>
+            <value ProjectName="UI-Trunk">
+                <modules>
+                    <entry>
+                        <key>UI-Trunk-Flight-Screens</key>
+                        <value ParentId="UI-Trunk" ProjectName="UI-Trunk-Flight-Screens">
+                            <modules>
+<entry>
+    <key>UI-Trunk-Flight-Screens-Prepare_Flights_details</key>
+    <value ParentId="UI-Trunk-Flight-Screens" ProjectName="UI-Trunk-Flight-Screens-Prepare_Flights_details">
+        <modules/>
+        <Path>D:\SVNs\AirportUi\Codebase\Trunk\flights-screens\flights-checkin-prepareflightdetails</Path>
+    </value>
+</entry>
+                            </modules>
+                            <Path>D:\SVNs\AirportUi\Codebase\Trunk\flights-screens</Path>
+                        </value>
+                    </entry>
+                </modules>
+                <Path>D:\SVNs\AirportUi\Codebase\Trunk</Path>
+            </value>
+        </entry>
+        <entry>
+            <key>UI-Trunk-Flight-Screens</key>
+            <value ParentId="UI-Trunk" ProjectName="UI-Trunk-Flight-Screens">
+                <modules>
+                    <entry>
+                        <key>UI-Trunk-Flight-Screens-Prepare_Flights_details</key>
+                        <value ParentId="UI-Trunk-Flight-Screens" ProjectName="UI-Trunk-Flight-Screens-Prepare_Flights_details">
+                            <modules/>
+                            <Path>D:\SVNs\AirportUi\Codebase\Trunk\flights-screens\flights-checkin-prepareflightdetails</Path>
+                        </value>
+                    </entry>
+                </modules>
+                <Path>D:\SVNs\AirportUi\Codebase\Trunk\flights-screens</Path>
+            </value>
+        </entry>
+        <entry>
+            <key>UI-Trunk-Flight-Screens-Prepare_Flights_details</key>
+            <value ParentId="UI-Trunk-Flight-Screens" ProjectName="UI-Trunk-Flight-Screens-Prepare_Flights_details">
+                <modules/>
+                <Path>D:\SVNs\AirportUi\Codebase\Trunk\flights-screens\flights-checkin-prepareflightdetails</Path>
+            </value>
+        </entry>
+        <entry>
+            <key>Checkin-Trunk</key>
+            <value ProjectName="Checkin-Trunk">
+                <modules>
+                    <entry>
+                        <key>Checkin-Trunk-Business_logic</key>
+                        <value ParentId="Checkin-Trunk" ProjectName="Checkin-Trunk-Business_logic">
+                            <modules>
+<entry>
+    <key>Checkin-Trunk-Business_logic-war</key>
+    <value ParentId="Checkin-Trunk-Business_logic" ProjectName="Checkin-Trunk-Business_logic-war">
+        <modules/>
+        <Path>D:\SVNs\CHECKIN\Codebase\Trunk\business-logic\war</Path>
+    </value>
+</entry>
+<entry>
+    <key>Checkin-Trunk-Business_logic-common_impl</key>
+    <value ParentId="Checkin-Trunk-Business_logic" ProjectName="Checkin-Trunk-Business_logic-common_impl">
+        <modules/>
+        <Path>D:\SVNs\CHECKIN\Codebase\Trunk\business-logic\checkin-common</Path>
+    </value>
+</entry>
+<entry>
+    <key>Checkin-Trunk-Business_logic-ear</key>
+    <value ParentId="Checkin-Trunk-Business_logic" ProjectName="Checkin-Trunk-Business_logic-ear">
+        <modules/>
+        <Path>D:\SVNs\CHECKIN\Codebase\Trunk\business-logic\service-container</Path>
+    </value>
+</entry>
+<entry>
+    <key>Checkin-Trunk-Business_logic-service</key>
+    <value ParentId="Checkin-Trunk-Business_logic" ProjectName="Checkin-Trunk-Business_logic-service">
+        <modules/>
+        <Path>D:\SVNs\CHECKIN\Codebase\Trunk\business-logic\service</Path>
+    </value>
+</entry>
+                            </modules>
+                            <Path>D:\SVNs\CHECKIN\Codebase\Trunk\business-logic</Path>
+                        </value>
+                    </entry>
+                </modules>
+                <Path>D:\SVNs\CHECKIN\Codebase\Trunk</Path>
+            </value>
+        </entry>
+        <entry>
+            <key>Checkin-Trunk-Business_logic</key>
+            <value ParentId="Checkin-Trunk" ProjectName="Checkin-Trunk-Business_logic">
+                <modules>
+                    <entry>
+                        <key>Checkin-Trunk-Business_logic-war</key>
+                        <value ParentId="Checkin-Trunk-Business_logic" ProjectName="Checkin-Trunk-Business_logic-war">
+                            <modules/>
+                            <Path>D:\SVNs\CHECKIN\Codebase\Trunk\business-logic\war</Path>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>Checkin-Trunk-Business_logic-common_impl</key>
+                        <value ParentId="Checkin-Trunk-Business_logic" ProjectName="Checkin-Trunk-Business_logic-common_impl">
+                            <modules/>
+                            <Path>D:\SVNs\CHECKIN\Codebase\Trunk\business-logic\checkin-common</Path>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>Checkin-Trunk-Business_logic-ear</key>
+                        <value ParentId="Checkin-Trunk-Business_logic" ProjectName="Checkin-Trunk-Business_logic-ear">
+                            <modules/>
+                            <Path>D:\SVNs\CHECKIN\Codebase\Trunk\business-logic\service-container</Path>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>Checkin-Trunk-Business_logic-service</key>
+                        <value ParentId="Checkin-Trunk-Business_logic" ProjectName="Checkin-Trunk-Business_logic-service">
+                            <modules/>
+                            <Path>D:\SVNs\CHECKIN\Codebase\Trunk\business-logic\service</Path>
+                        </value>
+                    </entry>
+                </modules>
+                <Path>D:\SVNs\CHECKIN\Codebase\Trunk\business-logic</Path>
+            </value>
+        </entry>
+        <entry>
+            <key>Checkin-Trunk-Business_logic-common_impl</key>
+            <value ParentId="Checkin-Trunk-Business_logic" ProjectName="Checkin-Trunk-Business_logic-common_impl">
+                <modules/>
+                <Path>D:\SVNs\CHECKIN\Codebase\Trunk\business-logic\checkin-common</Path>
+            </value>
+        </entry>
+        <entry>
+            <key>Checkin-Trunk-Business_logic-service</key>
+            <value ParentId="Checkin-Trunk-Business_logic" ProjectName="Checkin-Trunk-Business_logic-service">
+                <modules/>
+                <Path>D:\SVNs\CHECKIN\Codebase\Trunk\business-logic\service</Path>
+            </value>
+        </entry>
+        <entry>
+            <key>Checkin-Trunk-Business_logic-war</key>
+            <value ParentId="Checkin-Trunk-Business_logic" ProjectName="Checkin-Trunk-Business_logic-war">
+                <modules/>
+                <Path>D:\SVNs\CHECKIN\Codebase\Trunk\business-logic\war</Path>
+            </value>
+        </entry>
+        <entry>
+            <key>Checkin-Trunk-Business_logic-ear</key>
+            <value ParentId="Checkin-Trunk-Business_logic" ProjectName="Checkin-Trunk-Business_logic-ear">
+                <modules/>
+                <Path>D:\SVNs\CHECKIN\Codebase\Trunk\business-logic\service-container</Path>
+            </value>
+        </entry>
+        <entry>
+            <key>Flights-trunk</key>
+            <value ProjectName="Flights-trunk">
+                <modules>
+                    <entry>
+                        <key>Flights-trunk-Business-logic</key>
+                        <value ParentId="Flights-trunk" ProjectName="Flights-trunk-Business-logic">
+                            <modules/>
+                            <Path>D:\SVNs\Flights\Codebase\Trunk\business-logic</Path>
+                        </value>
+                    </entry>
+                </modules>
+                <Path>D:\SVNs\Flights\Codebase\Trunk</Path>
+            </value>
+        </entry>
+        <entry>
+            <key>Flights-trunk-Business-logic</key>
+            <value ParentId="Flights-trunk" ProjectName="Flights-trunk-Business-logic">
+                <modules/>
+                <Path>D:\SVNs\Flights\Codebase\Trunk\business-logic</Path>
+            </value>
+        </entry>
+        <entry>
+            <key>Travel-Trunk</key>
+            <value ProjectName="Travel-Trunk">
+                <modules>
+                    <entry>
+                        <key>Travel-Trunk-business-logic</key>
+                        <value ParentId="Travel-Trunk" ProjectName="Travel-Trunk-business-logic">
+                            <modules>
+<entry>
+    <key>Travel-Trunk-business-logic-service</key>
+    <value ParentId="Travel-Trunk-business-logic" ProjectName="Travel-Trunk-business-logic-service">
+        <modules/>
+        <Path>D:\SVNs\Travel\Codebase\Trunk\business-logic\service</Path>
+    </value>
+</entry>
+                            </modules>
+                            <Path>D:\SVNs\Travel\Codebase\Trunk\business-logic</Path>
+                        </value>
+                    </entry>
+                </modules>
+                <Path>D:\SVNs\Travel\Codebase\Trunk</Path>
+            </value>
+        </entry>
+        <entry>
+            <key>Travel-Trunk-business-logic</key>
+            <value ParentId="Travel-Trunk" ProjectName="Travel-Trunk-business-logic">
+                <modules>
+                    <entry>
+                        <key>Travel-Trunk-business-logic-service</key>
+                        <value ParentId="Travel-Trunk-business-logic" ProjectName="Travel-Trunk-business-logic-service">
+                            <modules/>
+                            <Path>D:\SVNs\Travel\Codebase\Trunk\business-logic\service</Path>
+                        </value>
+                    </entry>
+                </modules>
+                <Path>D:\SVNs\Travel\Codebase\Trunk\business-logic</Path>
+            </value>
+        </entry>
+        <entry>
+            <key>Travel-Trunk-business-logic-service</key>
+            <value ParentId="Travel-Trunk-business-logic" ProjectName="Travel-Trunk-business-logic-service">
+                <modules/>
+                <Path>D:\SVNs\Travel\Codebase\Trunk\business-logic\service</Path>
+            </value>
+        </entry>
+        <entry>
+            <key>Checkin-2.5-Business-logic</key>
+            <value ParentId="Checkin-2.5" ProjectName="Checkin-2.5-Business-logic">
+                <modules>
+                    <entry>
+                        <key>Checkin-2.5-Business-logic-war</key>
+                        <value ParentId="Checkin-2.5-Business-logic" ProjectName="Checkin-2.5-Business-logic-war">
+                            <modules/>
+                            <Path>D:\SVNs\CHECKIN\Codebase\CR-2.5\business-logic\war</Path>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>Checkin-2.5-Business-logic-service</key>
+                        <value ParentId="Checkin-2.5-Business-logic" ProjectName="Checkin-2.5-Business-logic-service">
+                            <modules/>
+                            <Path>D:\SVNs\CHECKIN\Codebase\CR-2.5\business-logic\service</Path>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>Checkin-2.5-Business-logic-ear</key>
+                        <value ParentId="Checkin-2.5-Business-logic" ProjectName="Checkin-2.5-Business-logic-ear">
+                            <modules/>
+                            <Path>D:\SVNs\CHECKIN\Codebase\CR-2.5\business-logic\service-container</Path>
+                        </value>
+                    </entry>
+                </modules>
+                <Path>D:\SVNs\CHECKIN\Codebase\CR-2.5\business-logic</Path>
+            </value>
+        </entry>
+        <entry>
+            <key>Checkin-2.5-Business-logic-service</key>
+            <value ParentId="Checkin-2.5-Business-logic" ProjectName="Checkin-2.5-Business-logic-service">
+                <modules/>
+                <Path>D:\SVNs\CHECKIN\Codebase\CR-2.5\business-logic\service</Path>
+            </value>
+        </entry>
+        <entry>
+            <key>Checkin-2.5-Business-logic-war</key>
+            <value ParentId="Checkin-2.5-Business-logic" ProjectName="Checkin-2.5-Business-logic-war">
+                <modules/>
+                <Path>D:\SVNs\CHECKIN\Codebase\CR-2.5\business-logic\war</Path>
+            </value>
+        </entry>
+        <entry>
+            <key>Checkin-2.5-Business-logic-ear</key>
+            <value ParentId="Checkin-2.5-Business-logic" ProjectName="Checkin-2.5-Business-logic-ear">
+                <modules/>
+                <Path>D:\SVNs\CHECKIN\Codebase\CR-2.5\business-logic\service-container</Path>
+            </value>
+        </entry>
+        <entry>
+            <key>Seat_trunk</key>
+            <value ProjectName="Seat_trunk">
+                <modules>
+                    <entry>
+                        <key>Seat_trunk-Business-logic</key>
+                        <value ParentId="Seat_trunk" ProjectName="Seat_trunk-Business-logic">
+                            <modules/>
+                            <Path>D:\SVNs\Seats\Codebases\code\business-logic</Path>
+                        </value>
+                    </entry>
+                </modules>
+                <Path>D:\SVNs\Seats\Codebases\code</Path>
+            </value>
+        </entry>
+        <entry>
+            <key>Seat_trunk-Business-logic</key>
+            <value ParentId="Seat_trunk" ProjectName="Seat_trunk-Business-logic">
+                <modules>
+                    <entry>
+                        <key>Seat_trunk-Business-logic-service</key>
+                        <value ParentId="Seat_trunk-Business-logic" ProjectName="Seat_trunk-Business-logic-service">
+                            <modules/>
+                            <Path>D:\SVNs\Seats\Codebases\code\business-logic\seats-services</Path>
+                        </value>
+                    </entry>
+                </modules>
+                <Path>D:\SVNs\Seats\Codebases\code\business-logic</Path>
+            </value>
+        </entry>
+        <entry>
+            <key>Seat_trunk-Business-logic-service</key>
+            <value ParentId="Seat_trunk-Business-logic" ProjectName="Seat_trunk-Business-logic-service">
+                <modules/>
+                <Path>D:\SVNs\Seats\Codebases\code\business-logic\seats-services</Path>
+            </value>
+        </entry>
+    </map>
+</ProjectsHolder>

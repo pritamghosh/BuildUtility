@@ -103,6 +103,8 @@ public class HomeScreenController implements Initializable {
     @FXML
     private Button buildButton;
     @FXML
+    private Button springBootRunButton;
+    @FXML
     private Button resourceBuildButton;
     @FXML
     ToggleGroup group = new ToggleGroup();
@@ -123,7 +125,13 @@ public class HomeScreenController implements Initializable {
 
     public void buildAction() {
         onSelectionAction();
-        executeCommand(constructBuildCommand());
+        executeCommand(constructBuildCommand(false));
+    }
+    
+
+    public void buildSpringBootAction() {
+        onSelectionAction();
+        executeCommand(constructBuildCommand(true));
     }
 
     private void executeCommand(String command) {
@@ -141,13 +149,19 @@ public class HomeScreenController implements Initializable {
         executeCommand(constructResourceCommand());
     }
 
-    private String constructBuildCommand() {
+    private String constructBuildCommand(boolean isSpringBoot) {
         StringBuilder command = new StringBuilder();
         if (StringUtils.isNotEmpty(modulePath.getText())) {
             command.append(StringUtils.substring(modulePath.getText(), 0, 2));
             command.append(" && cd ");
             command.append(modulePath.getText());
-            command.append(" && ").append(constructMavenCommandForBuild());
+            command.append(" && ");
+            if(isSpringBoot) {
+            	command.append("mvn spring-boot:run ");
+            }
+            else {
+            	command.append(constructMavenCommandForBuild());
+            }
         }
         return command.toString();
     }
